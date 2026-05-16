@@ -1,78 +1,114 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
+﻿using Microsoft.Web.WebView2.Core;
+using System;
 using System.Drawing;
 using System.IO;
-using System.Text;
 using System.Windows.Forms;
 
 namespace PreciseSkin___LUMYVUE
 {
     public partial class WelcomeForm : Form
     {
+        private bool isExiting = false;
+
         public WelcomeForm()
         {
             InitializeComponent();
+
+            // 1. Force the form to use double-buffering to stop control flickering
+            this.DoubleBuffered = true;
+            this.SetStyle(ControlStyles.AllPaintingInWmPaint | ControlStyles.UserPaint | ControlStyles.OptimizedDoubleBuffer, true);
+
+            // 2. Start completely invisible for the smooth entry fade
+            this.Opacity = 0;
+
+            this.Load += new System.EventHandler(this.WelcomeForm_Load_1);
+            this.animationTimer.Tick += new System.EventHandler(this.animationTimer_Tick);
         }
 
-        // ✅ 1. This fires automatically the split second the form opens
+        // 🌟 THE SECRET WEAPON TO STOP ALL WINFORMS GLITCHING 🌟
+        // This forces Windows to compositing the entire form layer down seamlessly
+        protected override CreateParams CreateParams
+        {
+            get
+            {
+                CreateParams cp = base.CreateParams;
+                cp.ExStyle |= 0x02000000; // WS_EX_COMPOSITED: Paints all controls from bottom to top smoothly
+                return cp;
+            }
+        }
+
         private async void WelcomeForm_Load_1(object sender, EventArgs e)
         {
-            // 1. Initialize the Edge Chromium engine
+            // 3. Set a crisp interval for the animation timer
+            animationTimer.Interval = 15;
+            animationTimer.Start();
+
+            // 4. Initialize your video engine background
             await videoBackground.EnsureCoreWebView2Async();
+            string assetsFolder = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Assets");
+            videoBackground.CoreWebView2.SetVirtualHostNameToFolderMapping(
+                "lumyvue.local",
+                assetsFolder,
+                Microsoft.Web.WebView2.Core.CoreWebView2HostResourceAccessKind.Allow
+            );
 
-            // 2. Point to your Assets folder where LUMYVUE.mp4 lives
-            string videoPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Assets", "LUMYVUE.mp4");
-            string videoUrl = new Uri(videoPath).AbsoluteUri;
-
-            // 🚨 QUICK TEST: If the file is physically missing where the app runs, show a warning
-            if (!File.Exists(videoPath))
-            {
-                MessageBox.Show($"Video file not found at path:\n{videoPath}\n\nPlease check your Assets folder properties!", "Missing Video Asset");
-            }
-
-            // 3. Setup a borderless HTML5 player
-            string htmlLayout = $@"
+            string htmlLayout = @"
         <!DOCTYPE html>
         <html>
         <head>
             <style>
-                * {{ margin: 0; padding: 0; overflow: hidden; }}
-                body, html {{ 
-                    width: 100%; 
-                    height: 100%; 
-                    background-color: #1a1512; 
-                }}
-                video {{
-                    position: fixed;
-                    top: 50%;
-                    left: 50%;
-                    min-width: 100%;
-                    min-height: 100%;
-                    width: auto;
-                    height: auto;
-                    transform: translate(-50%, -50%);
-                    object-fit: cover;
-                }}
+                * { margin: 0; padding: 0; overflow: hidden; box-sizing: border-box; }
+                body, html { width: 100%; height: 100%; background-color: #1a1512; }
+                video { position: fixed; top: 50%; left: 50%; min-width: 100%; min-height: 100%; width: 100vw; height: 100vh; transform: translate(-50%, -50%); object-fit: cover; }
             </style>
         </head>
         <body>
-            <video autoplay loop muted playsinline>
-                <source src='{videoUrl}' type='video/mp4'>
-            </video>
+            <video autoplay loop muted playsinline><source src='https://lumyvue.local/LUMYVUE.mp4' type='video/mp4'></video>
         </body>
         </html>";
 
-            // 4. Inject and play the video canvas automatically
             videoBackground.NavigateToString(htmlLayout);
         }
 
-        // ✅ 2. This satisfies the precise name the designer file wants
-        private void videoBackground_Click_1(object sender, EventArgs e)
+        private void animationTimer_Tick(object sender, EventArgs e)
         {
-            // Keeps the designer happy!
-            // Later, you can add code here to transition to your ImageIngestForm
+            if (!isExiting)
+            {
+                // --- SMOOTH ENTRANCE FADE ---
+                if (this.Opacity < 1.0)
+                {
+                    this.Opacity += 0.05; // Fades in cleanly
+                }
+                else
+                {
+                    animationTimer.Stop();
+                }
+            }
+            else
+            {
+                // --- SMOOTH EXIT FADE ---
+                if (this.Opacity > 0.0)
+                {
+                    this.Opacity -= 0.06; // Dissolves down beautifully
+                }
+                else
+                {
+                    animationTimer.Stop();
+
+                    // Open the AboutUs form right as this one vanishes
+                    AboutUs nextForm = new AboutUs();
+                    nextForm.Show();
+                    this.Hide();
+                }
+            }
         }
+
+        private void btnGetStarted_Click(object sender, EventArgs e)
+        {
+            isExiting = true;
+            animationTimer.Start();
+        }
+
+        private void videoBackground_Click_1(object sender, EventArgs e) { }
     }
 }

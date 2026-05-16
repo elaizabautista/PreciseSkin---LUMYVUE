@@ -33,6 +33,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Update="Assets\AboutUs.mp4">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="Assets\LUMYVUE.mp4">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
