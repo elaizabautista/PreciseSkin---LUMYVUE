@@ -55,7 +55,6 @@
             webView21.Size = new Size(1771, 848);
             webView21.TabIndex = 0;
             webView21.ZoomFactor = 1D;
-            webView21.Click += webView21_Click;
             // 
             // panel1
             // 
@@ -69,7 +68,6 @@
             panel1.Name = "panel1";
             panel1.Size = new Size(664, 546);
             panel1.TabIndex = 1;
-            panel1.Paint += panel1_Paint;
             // 
             // lblCondition
             // 
@@ -111,7 +109,6 @@
             lblSkinType.Size = new Size(258, 27);
             lblSkinType.TabIndex = 3;
             lblSkinType.Text = " D E T E R M I N I N G . . .";
-            lblSkinType.Click += lblSkinType_Click;
             // 
             // btnBackToUpload
             // 
@@ -154,7 +151,6 @@
             picAnalyzedImage.SizeMode = PictureBoxSizeMode.Zoom;
             picAnalyzedImage.TabIndex = 6;
             picAnalyzedImage.TabStop = false;
-            picAnalyzedImage.Click += picAnalyzedImage_Click;
             // 
             // ResultsForm
             // 
