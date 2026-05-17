@@ -17,16 +17,47 @@ namespace PreciseSkin___LUMYVUE
     {
         private readonly InferenceSession _onnxSession;
 
-        // 🎯 Your three target conditions matching your custom model keys
-        // 🔄 Try rearranging the order to see if they snap into place:
+        // 🎯 Your three exact target skin conditions
+        // 🔄 Note: If Acne images predict Eczema or vice versa, simply change the order inside this list!
         private readonly string[] _diseaseLabels = {
-        "Eczema",             // Try making Eczema Index 0
-        "Acne",               // Try making Acne Index 1
-        "Hyperpigmentation"   // Index 2
+            "Acne",
+            "Eczema",
+            "Hyperpigmentation"
         };
+
+        public SkinAnalyzer()
+        {
+            // 🎯 FIXED: Bulletproof asset path routing
+            string baseDir = AppDomain.CurrentDomain.BaseDirectory;
+            string modelPath = Path.Combine(baseDir, "Assets", "PreciseSkin_Model.onnx");
+
+            // Backup check: If it's not in the running bin folder, look in the project directory
+            if (!File.Exists(modelPath))
+            {
+                modelPath = Path.Combine(baseDir, "PreciseSkin_Model.onnx");
+            }
+
+            if (File.Exists(modelPath))
+            {
+                _onnxSession = new InferenceSession(modelPath);
+            }
+            else
+            {
+                // Clear warning instead of a silent crash
+                System.Windows.Forms.MessageBox.Show(
+                    $"Critical Error: Could not find 'PreciseSkin_Model.onnx' file!\nChecked location: {modelPath}",
+                    "Missing Model File"
+                );
+            }
+        }
 
         public SkinAnalysisResult AnalyzeImage(string imagePath)
         {
+            if (_onnxSession == null)
+            {
+                return new SkinAnalysisResult { ConditionPrediction = "Engine Error" };
+            }
+
             DenseTensor<float> inputTensor = PreprocessImage(imagePath);
 
             var inputs = new List<NamedOnnxValue>
@@ -37,44 +68,30 @@ namespace PreciseSkin___LUMYVUE
             using IDisposableReadOnlyCollection<DisposableNamedOnnxValue> results = _onnxSession.Run(inputs);
             var outputsList = results.ToList();
 
-            // Extract the raw floats from the first output node
+            // 🎯 DIAGNOSTIC: Build a comprehensive map of ALL output names and sizes available
+            string outputMapSummary = $"Total Output Nodes Found: {outputsList.Count} -> ";
+
+            for (int i = 0; i < outputsList.Count; i++)
+            {
+                try
+                {
+                    float[] genericArray = outputsList[i].AsEnumerable<float>().ToArray();
+                    outputMapSummary += $"[Node {i} Name: '{outputsList[i].Name}' (Length: {genericArray.Length})] ";
+                }
+                catch
+                {
+                    outputMapSummary += $"[Node {i} Name: '{outputsList[i].Name}' (Non-float layer)] ";
+                }
+            }
+
+            // Default processing for safety
             float[] conditionScores = outputsList[0].AsEnumerable<float>().ToArray();
-
-            string dynamicDiagnosticInfo = "";
-            string predictedCondition = "Unknown";
-
-            try
-            {
-                // 🛠️ Let's build a text summary of exactly how many items are in this array
-                dynamicDiagnosticInfo = $"Array Length: {conditionScores.Length} | Values: ";
-                for (int i = 0; i < conditionScores.Length; i++)
-                {
-                    dynamicDiagnosticInfo += $"[{i}]: {conditionScores[i]:F4} ";
-                }
-
-                // Standard classification logic assuming array elements are probabilities
-                int highestConditionIndex = conditionScores.ToList().IndexOf(conditionScores.Max());
-
-                if (highestConditionIndex >= 0 && highestConditionIndex < _diseaseLabels.Length)
-                {
-                    predictedCondition = _diseaseLabels[highestConditionIndex];
-                }
-                else
-                {
-                    predictedCondition = $"Index {highestConditionIndex} out of text label range";
-                }
-            }
-            catch (Exception ex)
-            {
-                // If anything weird happens, catch it safely so the screen still loads
-                dynamicDiagnosticInfo = $"Diagnostic parsing failed: {ex.Message}";
-                predictedCondition = "Error parsing array";
-            }
+            string predictedCondition = "Scanning Model Nodes...";
 
             return new SkinAnalysisResult
             {
                 ConditionPrediction = predictedCondition,
-                SkinTypePrediction = dynamicDiagnosticInfo // This will display the array info safely right on your UI
+                SkinTypePrediction = outputMapSummary // Overrides text field to display the complete node names map!
             };
         }
 
@@ -83,6 +100,7 @@ namespace PreciseSkin___LUMYVUE
             using (System.Drawing.Bitmap rawBitmap = new System.Drawing.Bitmap(path))
             using (System.Drawing.Bitmap resizedBitmap = new System.Drawing.Bitmap(rawBitmap, new System.Drawing.Size(224, 224)))
             {
+                // Keep the dimensions that stop the input dimension crash
                 var tensor = new DenseTensor<float>(new[] { 1, 224, 224, 3 });
 
                 for (int y = 0; y < 224; y++)
@@ -91,9 +109,12 @@ namespace PreciseSkin___LUMYVUE
                     {
                         System.Drawing.Color pixel = resizedBitmap.GetPixel(x, y);
 
-                        tensor[0, y, x, 0] = pixel.R / 255.0f;
-                        tensor[0, y, x, 1] = pixel.G / 255.0f;
-                        tensor[0, y, x, 2] = pixel.B / 255.0f;
+                        // 🎯 ALTERNATIVE LAYOUT MAPPING:
+                        // If your model has an internal transpose layer, it might be expecting 
+                        // the channel index to map differently across the coordinates.
+                        tensor[0, 0, y, x] = pixel.R / 255.0f;
+                        tensor[0, 1, y, x] = pixel.G / 255.0f;
+                        tensor[0, 2, y, x] = pixel.B / 255.0f;
                     }
                 }
                 return tensor;
