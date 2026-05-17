@@ -96,7 +96,6 @@ namespace PreciseSkin___LUMYVUE
                 }
             }
         }
-
         /// <summary>
         /// Fires your single-file multi-task ONNX model directly against the uploaded file coordinate.
         /// </summary>
