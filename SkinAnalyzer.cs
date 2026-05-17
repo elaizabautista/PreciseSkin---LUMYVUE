@@ -5,11 +5,6 @@ using System.Linq;
 using Microsoft.ML.OnnxRuntime;
 using Microsoft.ML.OnnxRuntime.Tensors;
 
-// 🌟 Keep these exact three ImageSharp namespaces at the top!
-using SixLabors.ImageSharp;
-using SixLabors.ImageSharp.PixelFormats;
-using SixLabors.ImageSharp.Processing;
-
 namespace PreciseSkin___LUMYVUE
 {
     public class SkinAnalysisResult
@@ -22,74 +17,83 @@ namespace PreciseSkin___LUMYVUE
     {
         private readonly InferenceSession _onnxSession;
 
-        // Ensure these labels match the exact order of your Python training classes!
+        // 🎯 Your three target conditions matching your custom model keys
+        // 🔄 Try rearranging the order to see if they snap into place:
         private readonly string[] _diseaseLabels = {
-            "Melanoma", "Melanocytic Nevus", "Basal Cell Carcinoma",
-            "Actinic Keratosis", "Benign Keratosis", "Dermatofibroma", "Vascular Lesion"
+        "Eczema",             // Try making Eczema Index 0
+        "Acne",               // Try making Acne Index 1
+        "Hyperpigmentation"   // Index 2
         };
-
-        private readonly string[] _skinTypeLabels = {
-            "Type I", "Type II", "Type III", "Type IV", "Type V", "Type VI"
-        };
-
-        public SkinAnalyzer()
-        {
-            string modelPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Assets", "PreciseSkin_Model.onnx");
-            _onnxSession = new InferenceSession(modelPath);
-        }
 
         public SkinAnalysisResult AnalyzeImage(string imagePath)
         {
-            // 1. Preprocess the image to a standardized 1x3x224x224 input tensor
             DenseTensor<float> inputTensor = PreprocessImage(imagePath);
 
             var inputs = new List<NamedOnnxValue>
-            {
-                NamedOnnxValue.CreateFromTensor("input", inputTensor)
-            };
+    {
+        NamedOnnxValue.CreateFromTensor("input", inputTensor)
+    };
 
-            // 2. Run inference using our ONNX session
             using IDisposableReadOnlyCollection<DisposableNamedOnnxValue> results = _onnxSession.Run(inputs);
             var outputsList = results.ToList();
 
-            // ⚠️ Replace these with your exact ONNX model output layer node names if they differ
-            float[] diseaseRawScores = outputsList.First(o => o.Name == "disease_output").AsEnumerable<float>().ToArray();
-            float[] skinTypeRawScores = outputsList.First(o => o.Name == "fitzpatrick_output").AsEnumerable<float>().ToArray();
+            // Extract the raw floats from the first output node
+            float[] conditionScores = outputsList[0].AsEnumerable<float>().ToArray();
 
-            // 4. Decode output arrays to text predictions via ArgMax (highest index score)
-            int highestDiseaseIndex = diseaseRawScores.ToList().IndexOf(diseaseRawScores.Max());
-            string predictedDisease = _diseaseLabels[highestDiseaseIndex];
+            string dynamicDiagnosticInfo = "";
+            string predictedCondition = "Unknown";
 
-            int highestSkinTypeIndex = skinTypeRawScores.ToList().IndexOf(skinTypeRawScores.Max());
-            string predictedSkinType = _skinTypeLabels[highestSkinTypeIndex];
+            try
+            {
+                // 🛠️ Let's build a text summary of exactly how many items are in this array
+                dynamicDiagnosticInfo = $"Array Length: {conditionScores.Length} | Values: ";
+                for (int i = 0; i < conditionScores.Length; i++)
+                {
+                    dynamicDiagnosticInfo += $"[{i}]: {conditionScores[i]:F4} ";
+                }
+
+                // Standard classification logic assuming array elements are probabilities
+                int highestConditionIndex = conditionScores.ToList().IndexOf(conditionScores.Max());
+
+                if (highestConditionIndex >= 0 && highestConditionIndex < _diseaseLabels.Length)
+                {
+                    predictedCondition = _diseaseLabels[highestConditionIndex];
+                }
+                else
+                {
+                    predictedCondition = $"Index {highestConditionIndex} out of text label range";
+                }
+            }
+            catch (Exception ex)
+            {
+                // If anything weird happens, catch it safely so the screen still loads
+                dynamicDiagnosticInfo = $"Diagnostic parsing failed: {ex.Message}";
+                predictedCondition = "Error parsing array";
+            }
 
             return new SkinAnalysisResult
             {
-                ConditionPrediction = predictedDisease,
-                SkinTypePrediction = predictedSkinType
+                ConditionPrediction = predictedCondition,
+                SkinTypePrediction = dynamicDiagnosticInfo // This will display the array info safely right on your UI
             };
         }
 
         private DenseTensor<float> PreprocessImage(string path)
         {
-            // 🌟 FIXED: Explicitly calling SixLabors.ImageSharp.Image on both parts of this using statement 
-            // to completely bypass the Windows Forms conflicting engine.
-            using (SixLabors.ImageSharp.Image<Rgb24> image = SixLabors.ImageSharp.Image.Load<Rgb24>(path))
+            using (System.Drawing.Bitmap rawBitmap = new System.Drawing.Bitmap(path))
+            using (System.Drawing.Bitmap resizedBitmap = new System.Drawing.Bitmap(rawBitmap, new System.Drawing.Size(224, 224)))
             {
-                image.Mutate(x => x.Resize(224, 224));
-
-                var tensor = new DenseTensor<float>(new[] { 1, 3, 224, 224 });
+                var tensor = new DenseTensor<float>(new[] { 1, 224, 224, 3 });
 
                 for (int y = 0; y < 224; y++)
                 {
                     for (int x = 0; x < 224; x++)
                     {
-                        Rgb24 pixel = image[x, y];
+                        System.Drawing.Color pixel = resizedBitmap.GetPixel(x, y);
 
-                        // Scale color bytes down to float coordinates (0.0 to 1.0 standard normalization)
-                        tensor[0, 0, y, x] = pixel.R / 255.0f; // Red
-                        tensor[0, 1, y, x] = pixel.G / 255.0f; // Green
-                        tensor[0, 2, y, x] = pixel.B / 255.0f; // Blue
+                        tensor[0, y, x, 0] = pixel.R / 255.0f;
+                        tensor[0, y, x, 1] = pixel.G / 255.0f;
+                        tensor[0, y, x, 2] = pixel.B / 255.0f;
                     }
                 }
                 return tensor;

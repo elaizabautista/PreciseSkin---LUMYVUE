@@ -101,6 +101,7 @@ namespace PreciseSkin___LUMYVUE
         /// </summary>
         private void btnRunDiagnostics_Click(object sender, EventArgs e)
         {
+
             // Ensure the patient has actually uploaded a picture before running the neural network
             if (string.IsNullOrEmpty(_selectedFilePath))
             {
@@ -116,8 +117,9 @@ namespace PreciseSkin___LUMYVUE
                 // 2. Pass the user's selected file path through the AI pipeline
                 var report = analyzer.AnalyzeImage(_selectedFilePath);
 
-                // 3. Initialize your dedicated results screen dashboard and hand off the predictions!
-                ResultsForm diagnosticsWindow = new ResultsForm(report.ConditionPrediction, report.SkinTypePrediction, _selectedFilePath); diagnosticsWindow.Show();
+                // Forward the data to the results dashboard
+                ResultsForm diagnosticsWindow = new ResultsForm(report.ConditionPrediction, report.SkinTypePrediction, _selectedFilePath);
+                diagnosticsWindow.Show();
 
                 // 4. Cleanly hide this ingestion board from view
                 this.Hide();
