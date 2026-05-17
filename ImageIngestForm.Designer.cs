@@ -96,7 +96,6 @@
             picPatientUpload.Size = new Size(964, 645);
             picPatientUpload.TabIndex = 0;
             picPatientUpload.TabStop = false;
-            picPatientUpload.Click += picPatientUpload_Click;
             // 
             // flowLayoutPanel2
             // 
