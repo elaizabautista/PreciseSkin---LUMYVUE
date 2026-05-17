@@ -55,31 +55,21 @@ namespace PreciseSkin___LUMYVUE
                 return new SkinAnalysisResult { ConditionPrediction = "Engine Error", SkinTypePrediction = "N/A" };
             }
 
-            // 1. Run our fixed pixel normalization pipeline
             DenseTensor<float> inputTensor = PreprocessImage(imagePath);
 
-            // 2. 🎯 FIXED: Changed input layer key name from "input" to "input_image" to match your Kaggle model!
             var inputs = new List<NamedOnnxValue>
-            {
-                NamedOnnxValue.CreateFromTensor("input_image", inputTensor)
-            };
+    {
+        NamedOnnxValue.CreateFromTensor("input_image", inputTensor)
+    };
 
-            // 3. Execute the ONNX evaluation runtime
             using (IDisposableReadOnlyCollection<DisposableNamedOnnxValue> results = _onnxSession.Run(inputs))
             {
                 var outputsList = results.ToList();
-
-                // 4. 🎯 FIXED: Safely pull predictions out of your true output node name 'skin_condition_output'
-                var targetOutput = outputsList.FirstOrDefault(o => o.Name == "skin_condition_output");
-                if (targetOutput == null)
-                {
-                    // Fallback to position 0 if name lookup behaves strangely
-                    targetOutput = outputsList[0];
-                }
+                var targetOutput = outputsList.FirstOrDefault(o => o.Name == "skin_condition_output") ?? outputsList[0];
 
                 float[] conditionScores = targetOutput.AsEnumerable<float>().ToArray();
 
-                // 5. Math tracking: Find the array slot with the highest confidence decimal percentage
+                // Find the array index with the highest probability value
                 int highestIndex = 0;
                 float highestScore = -1f;
 
@@ -92,18 +82,16 @@ namespace PreciseSkin___LUMYVUE
                     }
                 }
 
-                // Protect against out-of-bounds arrays safely
-                string predictedCondition = "Unknown Condition";
-                if (highestIndex < _diseaseLabels.Length)
-                {
-                    predictedCondition = _diseaseLabels[highestIndex];
-                }
+                string predictedCondition = _diseaseLabels[highestIndex];
 
-                // Formulate the display readouts for your ResultsForm UI components
+                // 🎯 EMERGENCY READOUT: Show the raw scoring numbers right on the UI!
+                // This will tell us if the numbers are shifting or completely locked.
+                string rawScoresLog = $"Raw Output -> [0]: {conditionScores[0]:F4} | [1]: {conditionScores[1]:F4} | [2]: {conditionScores[2]:F4}";
+
                 return new SkinAnalysisResult
                 {
                     ConditionPrediction = $"{predictedCondition} ({highestScore:P1})",
-                    SkinTypePrediction = "Type Detected Successfully" // Keeping it clean for your UI frame
+                    SkinTypePrediction = rawScoresLog // This will print your raw numbers onto the results form text area!
                 };
             }
         }
@@ -113,7 +101,7 @@ namespace PreciseSkin___LUMYVUE
             using (System.Drawing.Bitmap rawBitmap = new System.Drawing.Bitmap(path))
             using (System.Drawing.Bitmap resizedBitmap = new System.Drawing.Bitmap(rawBitmap, new System.Drawing.Size(224, 224)))
             {
-                // 🎯 FIXED tensor dimensions to reflect NHWC format layout shape: [1, 224, 224, 3]
+                // 🎯 Set up a 4D tensor matching [Batch=1, Height=224, Width=224, Channels=3]
                 var tensor = new DenseTensor<float>(new[] { 1, 224, 224, 3 });
 
                 for (int y = 0; y < 224; y++)
@@ -122,7 +110,7 @@ namespace PreciseSkin___LUMYVUE
                     {
                         System.Drawing.Color pixel = resizedBitmap.GetPixel(x, y);
 
-                        // 🎯 FIXED: Map pixels across width/height/color axes sequentially matching your Keras generator logic!
+                        // 🎯 Lock the index values to explicit coordinates to feed the network correctly
                         tensor[0, y, x, 0] = pixel.R / 255.0f; // Red Channel
                         tensor[0, y, x, 1] = pixel.G / 255.0f; // Green Channel
                         tensor[0, y, x, 2] = pixel.B / 255.0f; // Blue Channel

@@ -35,6 +35,7 @@
             picPatientUpload = new PictureBox();
             flowLayoutPanel2 = new FlowLayoutPanel();
             btnRunDiagnostics = new Button();
+            panel1 = new Panel();
             ((System.ComponentModel.ISupportInitialize)webView21).BeginInit();
             flowLayoutPanel1.SuspendLayout();
             flowLayoutPanel3.SuspendLayout();
@@ -53,26 +54,26 @@
             webView21.Size = new Size(2527, 1270);
             webView21.TabIndex = 0;
             webView21.ZoomFactor = 1D;
+            webView21.Click += webView21_Click;
             // 
             // flowLayoutPanel1
             // 
-            flowLayoutPanel1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             flowLayoutPanel1.BackColor = Color.Tan;
             flowLayoutPanel1.Controls.Add(btnSelectImage);
             flowLayoutPanel1.Location = new Point(1298, 83);
             flowLayoutPanel1.Name = "flowLayoutPanel1";
-            flowLayoutPanel1.Size = new Size(1156, 148);
+            flowLayoutPanel1.Size = new Size(1156, 59);
             flowLayoutPanel1.TabIndex = 1;
             // 
             // btnSelectImage
             // 
             btnSelectImage.BackColor = Color.SeaShell;
             btnSelectImage.FlatStyle = FlatStyle.Flat;
-            btnSelectImage.Font = new Font("Yu Gothic", 36F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            btnSelectImage.Font = new Font("Yu Gothic", 21.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
             btnSelectImage.ForeColor = Color.SaddleBrown;
             btnSelectImage.Location = new Point(3, 3);
             btnSelectImage.Name = "btnSelectImage";
-            btnSelectImage.Size = new Size(1183, 145);
+            btnSelectImage.Size = new Size(1183, 52);
             btnSelectImage.TabIndex = 0;
             btnSelectImage.Text = "C H O O S E   F I L E";
             btnSelectImage.UseVisualStyleBackColor = false;
@@ -119,11 +120,20 @@
             btnRunDiagnostics.UseVisualStyleBackColor = false;
             btnRunDiagnostics.Click += btnRunDiagnostics_Click;
             // 
+            // panel1
+            // 
+            panel1.BackColor = Color.Snow;
+            panel1.Location = new Point(1301, 148);
+            panel1.Name = "panel1";
+            panel1.Size = new Size(1153, 113);
+            panel1.TabIndex = 5;
+            // 
             // ImageIngestForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(2527, 1270);
+            Controls.Add(panel1);
             Controls.Add(flowLayoutPanel2);
             Controls.Add(flowLayoutPanel3);
             Controls.Add(flowLayoutPanel1);
@@ -150,5 +160,6 @@
         public Button btnRunDiagnostics;
         public Button btnSelectImage;
         private PictureBox pictureBox1;
+        private Panel panel1;
     }
 }

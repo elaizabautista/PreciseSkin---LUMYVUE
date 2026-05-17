@@ -16,15 +16,25 @@ namespace PreciseSkin___LUMYVUE
         {
             InitializeComponent();
 
-            // 1. Assign the incoming ONNX model predictions directly to your labels
+            // 1. Assign the predictions
             lblCondition.Text = condition;
             lblSkinType.Text = $"Fitzpatrick {skinType}";
 
-            // 2. 🎯 Load the patient's uploaded photo into your new PictureBox frame safely
+            // 2. 🎯 FORCED UPDATE: Clear out old image references first
+            if (picAnalyzedImage.Image != null)
+            {
+                picAnalyzedImage.Image.Dispose();
+                picAnalyzedImage.Image = null;
+            }
+
+            // 3. Load the fresh path passed from the upload screen
             if (!string.IsNullOrEmpty(imagePath) && File.Exists(imagePath))
             {
-                // Explicitly uses System.Drawing to prevent any ImageSharp conflicts
-                picAnalyzedImage.Image = System.Drawing.Image.FromFile(imagePath);
+                // Using a safe stream open prevents Windows from locking the file in your assets folder
+                using (var stream = new FileStream(imagePath, FileMode.Open, FileAccess.Read))
+                {
+                    picAnalyzedImage.Image = System.Drawing.Image.FromStream(stream);
+                }
             }
         }
 

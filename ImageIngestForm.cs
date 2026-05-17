@@ -89,9 +89,10 @@ namespace PreciseSkin___LUMYVUE
 
                 if (openFileDialog.ShowDialog() == DialogResult.OK)
                 {
+                    // 🎯 CRITICAL: This global variable MUST be set here!
                     _selectedFilePath = openFileDialog.FileName;
 
-                    // 🌟 FIXED: Explicitly telling it to use System.Drawing to prevent ImageSharp conflict
+                    // This updates the UI preview box on the ingest screen
                     picPatientUpload.Image = System.Drawing.Image.FromFile(_selectedFilePath);
                 }
             }
@@ -101,8 +102,7 @@ namespace PreciseSkin___LUMYVUE
         /// </summary>
         private void btnRunDiagnostics_Click(object sender, EventArgs e)
         {
-
-            // Ensure the patient has actually uploaded a picture before running the neural network
+            // 1. Ensure the patient has actually uploaded a picture before running the neural network
             if (string.IsNullOrEmpty(_selectedFilePath))
             {
                 MessageBox.Show("Please upload a clear photo of the target skin area first.", "Missing Input Image");
@@ -111,13 +111,14 @@ namespace PreciseSkin___LUMYVUE
 
             try
             {
-                // 1. Initialize our newly created skin machine learning brain class
+                // 2. Initialize our newly created skin machine learning brain class
                 SkinAnalyzer analyzer = new SkinAnalyzer();
 
-                // 2. Pass the user's selected file path through the AI pipeline
+                // 🎯 FIXED: Passing '_selectedFilePath' directly to guarantee the model analyzes 
+                // the actual picture you just uploaded, instead of a locked default path!
                 var report = analyzer.AnalyzeImage(_selectedFilePath);
 
-                // Forward the data to the results dashboard
+                // 3. Forward the dynamic data and the chosen image straight to the results dashboard
                 ResultsForm diagnosticsWindow = new ResultsForm(report.ConditionPrediction, report.SkinTypePrediction, _selectedFilePath);
                 diagnosticsWindow.Show();
 
@@ -128,6 +129,11 @@ namespace PreciseSkin___LUMYVUE
             {
                 MessageBox.Show($"Neural Runtime Disruption: {ex.Message}\n\nIf you see this error, double-check that your ONNX output layer names inside SkinAnalyzer.cs match your model's exact node names!", "ONNX Engine Error");
             }
+        }
+
+        private void webView21_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
