@@ -111,9 +111,9 @@ namespace PreciseSkin___LUMYVUE
                         System.Drawing.Color pixel = resizedBitmap.GetPixel(x, y);
 
                         // 🎯 Lock the index values to explicit coordinates to feed the network correctly
-                        tensor[0, y, x, 0] = pixel.R / 255.0f; // Red Channel
-                        tensor[0, y, x, 1] = pixel.G / 255.0f; // Green Channel
-                        tensor[0, y, x, 2] = pixel.B / 255.0f; // Blue Channel
+                        tensor[0, y, x, 0] = (pixel.R / 127.5f) - 1f;
+                        tensor[0, y, x, 1] = (pixel.G / 127.5f) - 1f;
+                        tensor[0, y, x, 2] = (pixel.B / 127.5f) - 1f;
                     }
                 }
                 return tensor;
