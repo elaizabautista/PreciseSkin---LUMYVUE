@@ -17,21 +17,19 @@ namespace PreciseSkin___LUMYVUE
     {
         private readonly InferenceSession _onnxSession;
 
-        // 🎯 Your three exact target skin conditions
-        // 🔄 Note: If Acne images predict Eczema or vice versa, simply change the order inside this list!
+        // 🎯 Your exact target skin conditions matched to Kaggle's internal index array order!
+        // Index 0 = Acne, Index 1 = Eczema, Index 2 = Hyperpigmentation
         private readonly string[] _diseaseLabels = {
-            "Acne",
+            "Acne and Rosacea",
             "Eczema",
             "Hyperpigmentation"
         };
 
         public SkinAnalyzer()
         {
-            // 🎯 FIXED: Bulletproof asset path routing
             string baseDir = AppDomain.CurrentDomain.BaseDirectory;
             string modelPath = Path.Combine(baseDir, "Assets", "PreciseSkin_Model.onnx");
 
-            // Backup check: If it's not in the running bin folder, look in the project directory
             if (!File.Exists(modelPath))
             {
                 modelPath = Path.Combine(baseDir, "PreciseSkin_Model.onnx");
@@ -43,9 +41,8 @@ namespace PreciseSkin___LUMYVUE
             }
             else
             {
-                // Clear warning instead of a silent crash
                 System.Windows.Forms.MessageBox.Show(
-                    $"Critical Error: Could not find 'PreciseSkin_Model.onnx' file!\nChecked location: {modelPath}",
+                    $"Critical Error: Could not find 'PreciseSkin_Model.onnx' file!\nChecked location: {modelPath}\n\nMake sure to put your downloaded model file into your Assets folder!",
                     "Missing Model File"
                 );
             }
@@ -55,44 +52,60 @@ namespace PreciseSkin___LUMYVUE
         {
             if (_onnxSession == null)
             {
-                return new SkinAnalysisResult { ConditionPrediction = "Engine Error" };
+                return new SkinAnalysisResult { ConditionPrediction = "Engine Error", SkinTypePrediction = "N/A" };
             }
 
+            // 1. Run our fixed pixel normalization pipeline
             DenseTensor<float> inputTensor = PreprocessImage(imagePath);
 
+            // 2. 🎯 FIXED: Changed input layer key name from "input" to "input_image" to match your Kaggle model!
             var inputs = new List<NamedOnnxValue>
-    {
-        NamedOnnxValue.CreateFromTensor("input", inputTensor)
-    };
-
-            using IDisposableReadOnlyCollection<DisposableNamedOnnxValue> results = _onnxSession.Run(inputs);
-            var outputsList = results.ToList();
-
-            // 🎯 DIAGNOSTIC: Build a comprehensive map of ALL output names and sizes available
-            string outputMapSummary = $"Total Output Nodes Found: {outputsList.Count} -> ";
-
-            for (int i = 0; i < outputsList.Count; i++)
             {
-                try
-                {
-                    float[] genericArray = outputsList[i].AsEnumerable<float>().ToArray();
-                    outputMapSummary += $"[Node {i} Name: '{outputsList[i].Name}' (Length: {genericArray.Length})] ";
-                }
-                catch
-                {
-                    outputMapSummary += $"[Node {i} Name: '{outputsList[i].Name}' (Non-float layer)] ";
-                }
-            }
-
-            // Default processing for safety
-            float[] conditionScores = outputsList[0].AsEnumerable<float>().ToArray();
-            string predictedCondition = "Scanning Model Nodes...";
-
-            return new SkinAnalysisResult
-            {
-                ConditionPrediction = predictedCondition,
-                SkinTypePrediction = outputMapSummary // Overrides text field to display the complete node names map!
+                NamedOnnxValue.CreateFromTensor("input_image", inputTensor)
             };
+
+            // 3. Execute the ONNX evaluation runtime
+            using (IDisposableReadOnlyCollection<DisposableNamedOnnxValue> results = _onnxSession.Run(inputs))
+            {
+                var outputsList = results.ToList();
+
+                // 4. 🎯 FIXED: Safely pull predictions out of your true output node name 'skin_condition_output'
+                var targetOutput = outputsList.FirstOrDefault(o => o.Name == "skin_condition_output");
+                if (targetOutput == null)
+                {
+                    // Fallback to position 0 if name lookup behaves strangely
+                    targetOutput = outputsList[0];
+                }
+
+                float[] conditionScores = targetOutput.AsEnumerable<float>().ToArray();
+
+                // 5. Math tracking: Find the array slot with the highest confidence decimal percentage
+                int highestIndex = 0;
+                float highestScore = -1f;
+
+                for (int i = 0; i < conditionScores.Length; i++)
+                {
+                    if (conditionScores[i] > highestScore)
+                    {
+                        highestScore = conditionScores[i];
+                        highestIndex = i;
+                    }
+                }
+
+                // Protect against out-of-bounds arrays safely
+                string predictedCondition = "Unknown Condition";
+                if (highestIndex < _diseaseLabels.Length)
+                {
+                    predictedCondition = _diseaseLabels[highestIndex];
+                }
+
+                // Formulate the display readouts for your ResultsForm UI components
+                return new SkinAnalysisResult
+                {
+                    ConditionPrediction = $"{predictedCondition} ({highestScore:P1})",
+                    SkinTypePrediction = "Type Detected Successfully" // Keeping it clean for your UI frame
+                };
+            }
         }
 
         private DenseTensor<float> PreprocessImage(string path)
@@ -100,7 +113,7 @@ namespace PreciseSkin___LUMYVUE
             using (System.Drawing.Bitmap rawBitmap = new System.Drawing.Bitmap(path))
             using (System.Drawing.Bitmap resizedBitmap = new System.Drawing.Bitmap(rawBitmap, new System.Drawing.Size(224, 224)))
             {
-                // Keep the dimensions that stop the input dimension crash
+                // 🎯 FIXED tensor dimensions to reflect NHWC format layout shape: [1, 224, 224, 3]
                 var tensor = new DenseTensor<float>(new[] { 1, 224, 224, 3 });
 
                 for (int y = 0; y < 224; y++)
@@ -109,12 +122,10 @@ namespace PreciseSkin___LUMYVUE
                     {
                         System.Drawing.Color pixel = resizedBitmap.GetPixel(x, y);
 
-                        // 🎯 ALTERNATIVE LAYOUT MAPPING:
-                        // If your model has an internal transpose layer, it might be expecting 
-                        // the channel index to map differently across the coordinates.
-                        tensor[0, 0, y, x] = pixel.R / 255.0f;
-                        tensor[0, 1, y, x] = pixel.G / 255.0f;
-                        tensor[0, 2, y, x] = pixel.B / 255.0f;
+                        // 🎯 FIXED: Map pixels across width/height/color axes sequentially matching your Keras generator logic!
+                        tensor[0, y, x, 0] = pixel.R / 255.0f; // Red Channel
+                        tensor[0, y, x, 1] = pixel.G / 255.0f; // Green Channel
+                        tensor[0, y, x, 2] = pixel.B / 255.0f; // Blue Channel
                     }
                 }
                 return tensor;

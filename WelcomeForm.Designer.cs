@@ -92,6 +92,8 @@ namespace PreciseSkin___LUMYVUE
             Name = "WelcomeForm";
             Text = "Welcome Form";
             WindowState = FormWindowState.Maximized;
+            Load += WelcomeForm_Load_1;
+            Click += WelcomeForm_Load_1;
             ((System.ComponentModel.ISupportInitialize)videoBackground).EndInit();
             panelControlBar.ResumeLayout(false);
             ResumeLayout(false);
