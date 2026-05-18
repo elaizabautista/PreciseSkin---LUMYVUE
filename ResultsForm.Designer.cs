@@ -52,7 +52,7 @@
             webView21.Dock = DockStyle.Fill;
             webView21.Location = new Point(0, 0);
             webView21.Name = "webView21";
-            webView21.Size = new Size(2325, 1278);
+            webView21.Size = new Size(1924, 1061);
             webView21.TabIndex = 0;
             webView21.ZoomFactor = 1D;
             // 
@@ -64,9 +64,9 @@
             panel1.Controls.Add(label2);
             panel1.Controls.Add(label1);
             panel1.Controls.Add(lblCondition);
-            panel1.Location = new Point(132, 557);
+            panel1.Location = new Point(129, 415);
             panel1.Name = "panel1";
-            panel1.Size = new Size(1353, 546);
+            panel1.Size = new Size(760, 548);
             panel1.TabIndex = 1;
             // 
             // btnBackToUpload
@@ -75,7 +75,7 @@
             btnBackToUpload.FlatStyle = FlatStyle.Flat;
             btnBackToUpload.Location = new Point(0, 497);
             btnBackToUpload.Name = "btnBackToUpload";
-            btnBackToUpload.Size = new Size(1353, 49);
+            btnBackToUpload.Size = new Size(760, 49);
             btnBackToUpload.TabIndex = 4;
             btnBackToUpload.Text = "N E W   S C A N ";
             btnBackToUpload.UseVisualStyleBackColor = false;
@@ -127,17 +127,17 @@
             panel2.BackColor = Color.Tan;
             panel2.Controls.Add(picAnalyzedImage);
             panel2.Controls.Add(label3);
-            panel2.Location = new Point(1551, 557);
+            panel2.Location = new Point(895, 415);
             panel2.Name = "panel2";
-            panel2.Size = new Size(664, 546);
+            panel2.Size = new Size(583, 548);
             panel2.TabIndex = 5;
             // 
             // picAnalyzedImage
             // 
             picAnalyzedImage.BackColor = Color.Transparent;
-            picAnalyzedImage.Location = new Point(16, 30);
+            picAnalyzedImage.Location = new Point(3, 30);
             picAnalyzedImage.Name = "picAnalyzedImage";
-            picAnalyzedImage.Size = new Size(633, 491);
+            picAnalyzedImage.Size = new Size(577, 516);
             picAnalyzedImage.SizeMode = PictureBoxSizeMode.Zoom;
             picAnalyzedImage.TabIndex = 6;
             picAnalyzedImage.TabStop = false;
@@ -146,7 +146,7 @@
             // 
             label3.AutoSize = true;
             label3.Font = new Font("Yu Gothic", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label3.Location = new Point(0, 0);
+            label3.Location = new Point(16, 0);
             label3.Name = "label3";
             label3.Size = new Size(239, 27);
             label3.TabIndex = 5;
@@ -155,7 +155,7 @@
             // ResultsForm
             // 
             AutoScaleMode = AutoScaleMode.None;
-            ClientSize = new Size(2325, 1278);
+            ClientSize = new Size(1924, 1061);
             Controls.Add(panel2);
             Controls.Add(panel1);
             Controls.Add(webView21);

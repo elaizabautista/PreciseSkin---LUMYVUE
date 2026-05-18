@@ -51,7 +51,7 @@
             webView21.Dock = DockStyle.Fill;
             webView21.Location = new Point(0, 0);
             webView21.Name = "webView21";
-            webView21.Size = new Size(2527, 1270);
+            webView21.Size = new Size(1924, 1061);
             webView21.TabIndex = 0;
             webView21.ZoomFactor = 1D;
             webView21.Click += webView21_Click;
@@ -60,9 +60,9 @@
             // 
             flowLayoutPanel1.BackColor = Color.Tan;
             flowLayoutPanel1.Controls.Add(btnSelectImage);
-            flowLayoutPanel1.Location = new Point(1298, 83);
+            flowLayoutPanel1.Location = new Point(1016, 76);
             flowLayoutPanel1.Name = "flowLayoutPanel1";
-            flowLayoutPanel1.Size = new Size(1156, 59);
+            flowLayoutPanel1.Size = new Size(803, 59);
             flowLayoutPanel1.TabIndex = 1;
             // 
             // btnSelectImage
@@ -73,7 +73,7 @@
             btnSelectImage.ForeColor = Color.SaddleBrown;
             btnSelectImage.Location = new Point(3, 3);
             btnSelectImage.Name = "btnSelectImage";
-            btnSelectImage.Size = new Size(1183, 52);
+            btnSelectImage.Size = new Size(888, 52);
             btnSelectImage.TabIndex = 0;
             btnSelectImage.Text = "C H O O S E   F I L E";
             btnSelectImage.UseVisualStyleBackColor = false;
@@ -83,9 +83,9 @@
             // 
             flowLayoutPanel3.BackColor = Color.Tan;
             flowLayoutPanel3.Controls.Add(picPatientUpload);
-            flowLayoutPanel3.Location = new Point(1487, 488);
+            flowLayoutPanel3.Location = new Point(1163, 392);
             flowLayoutPanel3.Name = "flowLayoutPanel3";
-            flowLayoutPanel3.Size = new Size(967, 648);
+            flowLayoutPanel3.Size = new Size(668, 501);
             flowLayoutPanel3.TabIndex = 3;
             // 
             // picPatientUpload
@@ -94,7 +94,7 @@
             picPatientUpload.BackgroundImageLayout = ImageLayout.Zoom;
             picPatientUpload.Location = new Point(3, 3);
             picPatientUpload.Name = "picPatientUpload";
-            picPatientUpload.Size = new Size(964, 645);
+            picPatientUpload.Size = new Size(665, 498);
             picPatientUpload.TabIndex = 0;
             picPatientUpload.TabStop = false;
             // 
@@ -102,9 +102,9 @@
             // 
             flowLayoutPanel2.BackColor = Color.Linen;
             flowLayoutPanel2.Controls.Add(btnRunDiagnostics);
-            flowLayoutPanel2.Location = new Point(1487, 1160);
+            flowLayoutPanel2.Location = new Point(1163, 899);
             flowLayoutPanel2.Name = "flowLayoutPanel2";
-            flowLayoutPanel2.Size = new Size(967, 75);
+            flowLayoutPanel2.Size = new Size(668, 75);
             flowLayoutPanel2.TabIndex = 4;
             // 
             // btnRunDiagnostics
@@ -114,7 +114,7 @@
             btnRunDiagnostics.Font = new Font("Yu Gothic", 21.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
             btnRunDiagnostics.Location = new Point(3, 3);
             btnRunDiagnostics.Name = "btnRunDiagnostics";
-            btnRunDiagnostics.Size = new Size(964, 72);
+            btnRunDiagnostics.Size = new Size(668, 72);
             btnRunDiagnostics.TabIndex = 0;
             btnRunDiagnostics.Text = "S T A R T   S K I N   A N A L Y S I S";
             btnRunDiagnostics.UseVisualStyleBackColor = false;
@@ -123,15 +123,15 @@
             // panel1
             // 
             panel1.BackColor = Color.Snow;
-            panel1.Location = new Point(1301, 148);
+            panel1.Location = new Point(1019, 141);
             panel1.Name = "panel1";
-            panel1.Size = new Size(1153, 113);
+            panel1.Size = new Size(800, 113);
             panel1.TabIndex = 5;
             // 
             // ImageIngestForm
             // 
             AutoScaleMode = AutoScaleMode.None;
-            ClientSize = new Size(2527, 1270);
+            ClientSize = new Size(1924, 1061);
             Controls.Add(panel1);
             Controls.Add(flowLayoutPanel2);
             Controls.Add(flowLayoutPanel3);
