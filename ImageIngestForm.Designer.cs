@@ -159,6 +159,6 @@
         public Button btnRunDiagnostics;
         public Button btnSelectImage;
         private PictureBox pictureBox1;
-        private Panel panel1;
+        public Panel panel1;
     }
 }

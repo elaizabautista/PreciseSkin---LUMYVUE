@@ -22,6 +22,8 @@ namespace PreciseSkin___LUMYVUE
         {
             InitializeComponent();
             this.AutoScaleMode = AutoScaleMode.None;
+            this.FormBorderStyle = FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
         }
 
         private async void ImageIngestForm_Load(object sender, EventArgs e)

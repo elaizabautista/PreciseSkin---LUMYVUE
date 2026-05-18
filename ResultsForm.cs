@@ -17,6 +17,8 @@ namespace PreciseSkin___LUMYVUE
         {
             InitializeComponent();
             this.AutoScaleMode = AutoScaleMode.None;
+            this.FormBorderStyle = FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
 
             // 1. Assign the predictions
             lblCondition.Text = condition;
