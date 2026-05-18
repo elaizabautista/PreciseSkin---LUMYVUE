@@ -11,10 +11,12 @@ namespace PreciseSkin___LUMYVUE
 {
     public partial class ResultsForm : Form
     {
+
         // 🌟 Updated Constructor: Now accepts 'imagePath' as a third input item
         public ResultsForm(string condition, string skinType, string imagePath)
         {
             InitializeComponent();
+            this.AutoScaleMode = AutoScaleMode.None;
 
             // 1. Assign the predictions
             lblCondition.Text = condition;
