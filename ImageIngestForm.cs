@@ -41,39 +41,31 @@ namespace PreciseSkin___LUMYVUE
                 Microsoft.Web.WebView2.Core.CoreWebView2HostResourceAccessKind.Allow
             );
 
-            // 5. Inject full-bleed responsive CSS styling to dynamically lock your layout background in place
             string htmlLayout = @"
-                <!DOCTYPE html>
-                <html>
-                <head>
-                    <style>
-                        * { margin: 0; padding: 0; overflow: hidden; box-sizing: border-box; }
-                        body, html { 
-                            width: 100%; 
-                            height: 100%; 
-                            background-color: #1a1512; /* Matches your luxury brand brand dark aesthetic */
-                        }
-                        
-                        /* FULL SCREEN STATIC BACKGROUND SCALING VIA COVER */
-                        .dashboard-bg {
-                            position: fixed;
-                            top: 0;
-                            left: 0;
-                            width: 100vw;
-                            height: 100vh;
-                            background-image: url('https://lumyvue.local/ImageUpload.png');
-                            background-size: cover;          /* Completely floods out any black bars or sides */
-                            background-position: center center; /* Keeps your layout graphic composition perfectly centered */
-                            background-repeat: no-repeat;
-                        }
-                    </style>
-                </head>
-                <body>
-                    <div class='dashboard-bg'></div>
-                </body>
-                </html>";
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        * { margin: 0; padding: 0; overflow: hidden; box-sizing: border-box; font-family: 'Segoe UI', sans-serif; }
+        body, html { width: 100%; height: 100%; background-color: #1a1512; }
+        
+        /* Responsive Luxury Background */
+        .dashboard-bg {
+            position: fixed;
+            top: 0; left: 0; width: 100vw; height: 100vh;
+            background-image: url('https://lumyvue.local/ImageUpload.png');
+            background-size: cover;
+            background-position: center center;
+            background-repeat: no-repeat;
+            z-index: 1;
+        }
+    </style>
+</head>
+<body>
+    <div class='dashboard-bg'></div>
+</body>
+</html>";
 
-            // 6. Project your responsive background layout image onto the form
             webView21.NavigateToString(htmlLayout);
         }
 
@@ -97,6 +89,7 @@ namespace PreciseSkin___LUMYVUE
                 }
             }
         }
+
         /// <summary>
         /// Fires your single-file multi-task ONNX model directly against the uploaded file coordinate.
         /// </summary>
