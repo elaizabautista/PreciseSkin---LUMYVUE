@@ -154,8 +154,7 @@
             // 
             // ResultsForm
             // 
-            AutoScaleDimensions = new SizeF(96F, 96F);
-            AutoScaleMode = AutoScaleMode.Dpi;
+            AutoScaleMode = AutoScaleMode.None;
             ClientSize = new Size(2325, 1278);
             Controls.Add(panel2);
             Controls.Add(panel1);

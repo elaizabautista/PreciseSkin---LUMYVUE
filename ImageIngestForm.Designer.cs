@@ -130,8 +130,7 @@
             // 
             // ImageIngestForm
             // 
-            AutoScaleDimensions = new SizeF(96F, 96F);
-            AutoScaleMode = AutoScaleMode.Dpi;
+            AutoScaleMode = AutoScaleMode.None;
             ClientSize = new Size(2527, 1270);
             Controls.Add(panel1);
             Controls.Add(flowLayoutPanel2);
