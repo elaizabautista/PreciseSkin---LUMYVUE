@@ -147,50 +147,54 @@ namespace PreciseSkin___LUMYVUE
             // Validate uploaded image
             if (string.IsNullOrEmpty(_selectedFilePath))
             {
-                MessageBox.Show(
-                    "Please upload a skin image first.",
-                    "Missing Image"
-                );
-
+                MessageBox.Show("Please upload a skin image first.", "Missing Image");
                 return;
             }
 
             // Validate patient info
             if (string.IsNullOrWhiteSpace(TxtFullName.Text))
             {
-                MessageBox.Show(
-                    "Please enter patient full name.",
-                    "Missing Patient Information"
-                );
-
+                MessageBox.Show("Please enter patient full name.", "Missing Patient Information");
                 return;
             }
 
             try
             {
                 // Run AI
-                SkinAnalyzer analyzer =
-                    new SkinAnalyzer();
+                SkinAnalyzer analyzer = new SkinAnalyzer();
+                var report = analyzer.AnalyzeImage(_selectedFilePath);
 
-                var report =
-                    analyzer.AnalyzeImage(_selectedFilePath);
+                // ==============================
+                // SAVE TO DATABASE (STEP 3 FIX)
+                // ==============================
+                DatabaseHelper db = new DatabaseHelper();
+
+                db.SavePatientRecord(
+                    TxtPatientID.Text,
+                    TxtFullName.Text,
+                    int.Parse(TxtAge.Text),
+                    TxtGender.Text,
+                    TxtContactNumber.Text,
+                    TxtLocation.Text,
+                    dateTimePicker1.Value,
+                    report.ConditionPrediction,
+                    report.RawScores,
+                    _selectedFilePath
+                );
 
                 // Open Results Form
-                ResultsForm diagnosticsWindow =
-                    new ResultsForm(
-
-                        report.ConditionPrediction,
-                        report.RawScores,
-                        _selectedFilePath,
-
-                        TxtPatientID.Text,
-                        TxtFullName.Text,
-                        TxtAge.Text,
-                        TxtGender.Text,
-                        TxtContactNumber.Text,
-                        TxtLocation.Text,
-                        dateTimePicker1.Value.ToShortDateString()
-                    );
+                ResultsForm diagnosticsWindow = new ResultsForm(
+                    report.ConditionPrediction,
+                    report.RawScores,
+                    _selectedFilePath,
+                    TxtPatientID.Text,
+                    TxtFullName.Text,
+                    TxtAge.Text,
+                    TxtGender.Text,
+                    TxtContactNumber.Text,
+                    TxtLocation.Text,
+                    dateTimePicker1.Value.ToShortDateString()
+                );
 
                 diagnosticsWindow.Show();
 
