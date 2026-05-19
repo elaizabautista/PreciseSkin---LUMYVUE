@@ -98,7 +98,7 @@
             SearchBtn.Name = "SearchBtn";
             SearchBtn.Size = new Size(121, 23);
             SearchBtn.TabIndex = 6;
-            SearchBtn.Text = "button1";
+            SearchBtn.Text = "Search";
             SearchBtn.UseVisualStyleBackColor = true;
             SearchBtn.Click += SearchBtn_Click;
             // 
