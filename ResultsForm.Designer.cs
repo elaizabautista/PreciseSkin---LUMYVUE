@@ -53,10 +53,13 @@
             panel2 = new Panel();
             picAnalyzedImage = new PictureBox();
             label3 = new Label();
+            flowLayoutPanel1 = new FlowLayoutPanel();
+            btnAdminDashboard = new Button();
             ((System.ComponentModel.ISupportInitialize)webView21).BeginInit();
             panel1.SuspendLayout();
             panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)picAnalyzedImage).BeginInit();
+            flowLayoutPanel1.SuspendLayout();
             SuspendLayout();
             // 
             // webView21
@@ -70,6 +73,7 @@
             webView21.Size = new Size(1924, 1061);
             webView21.TabIndex = 0;
             webView21.ZoomFactor = 1D;
+            webView21.Click += webView21_Click;
             // 
             // panel1
             // 
@@ -334,10 +338,32 @@
             label3.TabIndex = 5;
             label3.Text = "Y O U R   P I C T U R E ";
             // 
+            // flowLayoutPanel1
+            // 
+            flowLayoutPanel1.BackColor = Color.AntiqueWhite;
+            flowLayoutPanel1.Controls.Add(btnAdminDashboard);
+            flowLayoutPanel1.Location = new Point(1756, 57);
+            flowLayoutPanel1.Name = "flowLayoutPanel1";
+            flowLayoutPanel1.Size = new Size(122, 28);
+            flowLayoutPanel1.TabIndex = 6;
+            // 
+            // btnAdminDashboard
+            // 
+            btnAdminDashboard.BackColor = Color.SeaShell;
+            btnAdminDashboard.Font = new Font("Yu Gothic", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            btnAdminDashboard.Location = new Point(3, 3);
+            btnAdminDashboard.Name = "btnAdminDashboard";
+            btnAdminDashboard.Size = new Size(119, 23);
+            btnAdminDashboard.TabIndex = 0;
+            btnAdminDashboard.Text = "Admin";
+            btnAdminDashboard.UseVisualStyleBackColor = false;
+            btnAdminDashboard.Click += btnAdminDashboard_Click;
+            // 
             // ResultsForm
             // 
             AutoScaleMode = AutoScaleMode.None;
             ClientSize = new Size(1924, 1061);
+            Controls.Add(flowLayoutPanel1);
             Controls.Add(panel2);
             Controls.Add(panel1);
             Controls.Add(webView21);
@@ -351,6 +377,7 @@
             panel2.ResumeLayout(false);
             panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)picAnalyzedImage).EndInit();
+            flowLayoutPanel1.ResumeLayout(false);
             ResumeLayout(false);
         }
 
@@ -382,5 +409,7 @@
         public Label contactnumberlbl;
         public Label locationlbl;
         public Label dateofconsultationlbl;
+        private FlowLayoutPanel flowLayoutPanel1;
+        public Button btnAdminDashboard;
     }
 }

@@ -6,6 +6,7 @@ using System.Drawing;
 using System.IO;
 using System.Text;
 using System.Windows.Forms;
+using Microsoft.VisualBasic;
 
 namespace PreciseSkin___LUMYVUE
 {
@@ -199,10 +200,44 @@ body, html {
         }
         private void label4_Click(object sender, EventArgs e)
         {
+            //
         }
 
         private void lblSkinType_Click(object sender, EventArgs e)
         {
+            //
+        }
+
+        private void webView21_Click(object sender, EventArgs e)
+        {
+            //
+        }
+
+        private void btnAdminDashboard_Click(object sender, EventArgs e)
+        {
+            string password = Interaction.InputBox(
+                "Enter Admin Password",
+                "Admin Access"
+            );
+
+            // Check password FIRST before opening AdminForm
+            if (password == "admin123")
+            {
+                AdminForm adminForm = new AdminForm();
+
+                adminForm.Show();
+
+                this.Hide();
+            }
+            else
+            {
+                MessageBox.Show(
+                    "Access Denied",
+                    "Security Warning",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning
+                );
+            }
         }
     }
 }
