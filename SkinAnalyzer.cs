@@ -20,11 +20,11 @@ namespace PreciseSkin___LUMYVUE
 
         // MUST MATCH TRAINING ORDER EXACTLY
         private readonly string[] _labels =
-      {
-             "acne",
-            "eczema",
-             "hyperpigmentation",
-              "normal"
+        {
+            "Acne",
+            "Eczema",
+            "Hyperpigmentation",
+            "Normal"
         };
 
         public SkinAnalyzer()
@@ -36,7 +36,9 @@ namespace PreciseSkin___LUMYVUE
             );
 
             if (!File.Exists(modelPath))
-                throw new Exception("ONNX model not found: " + modelPath);
+            {
+                throw new Exception("ONNX model not found:\n" + modelPath);
+            }
 
             _session = new InferenceSession(modelPath);
         }
@@ -46,7 +48,8 @@ namespace PreciseSkin___LUMYVUE
             using var bitmap = new Bitmap(imagePath);
             using var resized = new Bitmap(bitmap, new Size(224, 224));
 
-            var input = new DenseTensor<float>(new[] { 1, 224, 224, 3 });
+            // NHWC format
+            var tensor = new DenseTensor<float>(new[] { 1, 224, 224, 3 });
 
             for (int y = 0; y < 224; y++)
             {
@@ -54,43 +57,41 @@ namespace PreciseSkin___LUMYVUE
                 {
                     Color pixel = resized.GetPixel(x, y);
 
-                    input[0, y, x, 0] = (pixel.R / 127.5f) - 1f;
-                    input[0, y, x, 1] = (pixel.G / 127.5f) - 1f;
-                    input[0, y, x, 2] = (pixel.B / 127.5f) - 1f;
+                    // MobileNetV2 normalization
+                    tensor[0, y, x, 0] = (pixel.R / 127.5f) - 1f;
+                    tensor[0, y, x, 1] = (pixel.G / 127.5f) - 1f;
+                    tensor[0, y, x, 2] = (pixel.B / 127.5f) - 1f;
                 }
             }
 
+            // INPUT NAME
             var inputs = new List<NamedOnnxValue>
             {
-                NamedOnnxValue.CreateFromTensor("input_image", input)
+                NamedOnnxValue.CreateFromTensor("input_image", tensor)
             };
 
             using var results = _session.Run(inputs);
 
-            // FIX 1: safer output handling (prevents crash if name differs)
-            var output = results.FirstOrDefault();
-
-            if (output == null)
-                throw new Exception("ONNX model returned no outputs.");
+            // OUTPUT NAME
+            var output = results.First(x => x.Name == "skin_condition_output");
 
             float[] scores = output.AsEnumerable<float>().ToArray();
 
-            // FIX 2: safety check (prevents index crash)
-            if (scores.Length != _labels.Length)
-                throw new Exception($"Mismatch: model outputs {scores.Length} classes but labels has {_labels.Length}");
-
             int maxIndex = Array.IndexOf(scores, scores.Max());
+
             string prediction = _labels[maxIndex];
 
             string debug =
-                $"Acne: {scores[0]:F3}\n" +
-                $"Eczema: {scores[1]:F3}\n" +
-                $"Pigmentation: {scores[2]:F3}\n" +
-                $"Seborrheic: {scores[3]:F3}";
+                $"Acne: {scores[0]:P2}\n" +
+                $"Eczema: {scores[1]:P2}\n" +
+                $"Hyperpigmentation: {scores[2]:P2}\n" +
+                $"Normal: {scores[3]:P2}";
 
             return new SkinAnalysisResult
             {
-                ConditionPrediction = prediction,
+                ConditionPrediction =
+                    $"{prediction} ({scores[maxIndex]:P2})",
+
                 RawScores = debug
             };
         }

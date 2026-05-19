@@ -46,13 +46,13 @@
             panel2 = new Panel();
             picAnalyzedImage = new PictureBox();
             label3 = new Label();
-            label11 = new Label();
-            label12 = new Label();
-            label13 = new Label();
-            label14 = new Label();
-            label15 = new Label();
-            label16 = new Label();
-            label17 = new Label();
+            dateofconsultationlbl = new Label();
+            locationlbl = new Label();
+            contactnumberlbl = new Label();
+            genderlbl = new Label();
+            agelbl = new Label();
+            fullnamelbl = new Label();
+            patientidlbl = new Label();
             ((System.ComponentModel.ISupportInitialize)webView21).BeginInit();
             panel1.SuspendLayout();
             panel2.SuspendLayout();
@@ -74,13 +74,13 @@
             // panel1
             // 
             panel1.BackColor = Color.Tan;
-            panel1.Controls.Add(label17);
-            panel1.Controls.Add(label16);
-            panel1.Controls.Add(label15);
-            panel1.Controls.Add(label14);
-            panel1.Controls.Add(label13);
-            panel1.Controls.Add(label12);
-            panel1.Controls.Add(label11);
+            panel1.Controls.Add(patientidlbl);
+            panel1.Controls.Add(fullnamelbl);
+            panel1.Controls.Add(agelbl);
+            panel1.Controls.Add(genderlbl);
+            panel1.Controls.Add(contactnumberlbl);
+            panel1.Controls.Add(locationlbl);
+            panel1.Controls.Add(dateofconsultationlbl);
             panel1.Controls.Add(lblCondition1);
             panel1.Controls.Add(label10);
             panel1.Controls.Add(label9);
@@ -266,75 +266,75 @@
             label3.TabIndex = 5;
             label3.Text = "Y O U R   P I C T U R E ";
             // 
-            // label11
+            // dateofconsultationlbl
             // 
-            label11.AutoSize = true;
-            label11.Font = new Font("Yu Gothic", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label11.Location = new Point(373, 271);
-            label11.Name = "label11";
-            label11.Size = new Size(27, 27);
-            label11.TabIndex = 13;
-            label11.Text = "...";
+            dateofconsultationlbl.AutoSize = true;
+            dateofconsultationlbl.Font = new Font("Yu Gothic", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            dateofconsultationlbl.Location = new Point(373, 271);
+            dateofconsultationlbl.Name = "dateofconsultationlbl";
+            dateofconsultationlbl.Size = new Size(27, 27);
+            dateofconsultationlbl.TabIndex = 13;
+            dateofconsultationlbl.Text = "...";
             // 
-            // label12
+            // locationlbl
             // 
-            label12.AutoSize = true;
-            label12.Font = new Font("Yu Gothic", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label12.Location = new Point(373, 230);
-            label12.Name = "label12";
-            label12.Size = new Size(27, 27);
-            label12.TabIndex = 14;
-            label12.Text = "...";
+            locationlbl.AutoSize = true;
+            locationlbl.Font = new Font("Yu Gothic", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            locationlbl.Location = new Point(373, 230);
+            locationlbl.Name = "locationlbl";
+            locationlbl.Size = new Size(27, 27);
+            locationlbl.TabIndex = 14;
+            locationlbl.Text = "...";
             // 
-            // label13
+            // contactnumberlbl
             // 
-            label13.AutoSize = true;
-            label13.Font = new Font("Yu Gothic", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label13.Location = new Point(373, 190);
-            label13.Name = "label13";
-            label13.Size = new Size(27, 27);
-            label13.TabIndex = 15;
-            label13.Text = "...";
+            contactnumberlbl.AutoSize = true;
+            contactnumberlbl.Font = new Font("Yu Gothic", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            contactnumberlbl.Location = new Point(373, 190);
+            contactnumberlbl.Name = "contactnumberlbl";
+            contactnumberlbl.Size = new Size(27, 27);
+            contactnumberlbl.TabIndex = 15;
+            contactnumberlbl.Text = "...";
             // 
-            // label14
+            // genderlbl
             // 
-            label14.AutoSize = true;
-            label14.Font = new Font("Yu Gothic", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label14.Location = new Point(373, 150);
-            label14.Name = "label14";
-            label14.Size = new Size(27, 27);
-            label14.TabIndex = 16;
-            label14.Text = "...";
+            genderlbl.AutoSize = true;
+            genderlbl.Font = new Font("Yu Gothic", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            genderlbl.Location = new Point(373, 150);
+            genderlbl.Name = "genderlbl";
+            genderlbl.Size = new Size(27, 27);
+            genderlbl.TabIndex = 16;
+            genderlbl.Text = "...";
             // 
-            // label15
+            // agelbl
             // 
-            label15.AutoSize = true;
-            label15.Font = new Font("Yu Gothic", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label15.Location = new Point(373, 113);
-            label15.Name = "label15";
-            label15.Size = new Size(27, 27);
-            label15.TabIndex = 17;
-            label15.Text = "...";
+            agelbl.AutoSize = true;
+            agelbl.Font = new Font("Yu Gothic", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            agelbl.Location = new Point(373, 113);
+            agelbl.Name = "agelbl";
+            agelbl.Size = new Size(27, 27);
+            agelbl.TabIndex = 17;
+            agelbl.Text = "...";
             // 
-            // label16
+            // fullnamelbl
             // 
-            label16.AutoSize = true;
-            label16.Font = new Font("Yu Gothic", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label16.Location = new Point(373, 73);
-            label16.Name = "label16";
-            label16.Size = new Size(27, 27);
-            label16.TabIndex = 18;
-            label16.Text = "...";
+            fullnamelbl.AutoSize = true;
+            fullnamelbl.Font = new Font("Yu Gothic", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            fullnamelbl.Location = new Point(373, 73);
+            fullnamelbl.Name = "fullnamelbl";
+            fullnamelbl.Size = new Size(27, 27);
+            fullnamelbl.TabIndex = 18;
+            fullnamelbl.Text = "...";
             // 
-            // label17
+            // patientidlbl
             // 
-            label17.AutoSize = true;
-            label17.Font = new Font("Yu Gothic", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label17.Location = new Point(373, 30);
-            label17.Name = "label17";
-            label17.Size = new Size(27, 27);
-            label17.TabIndex = 19;
-            label17.Text = "...";
+            patientidlbl.AutoSize = true;
+            patientidlbl.Font = new Font("Yu Gothic", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            patientidlbl.Location = new Point(373, 30);
+            patientidlbl.Name = "patientidlbl";
+            patientidlbl.Size = new Size(27, 27);
+            patientidlbl.TabIndex = 19;
+            patientidlbl.Text = "...";
             // 
             // ResultsForm
             // 
@@ -377,12 +377,12 @@
         public Label label9;
         public Label lblCondition1;
         public Label label10;
-        public Label label17;
-        public Label label16;
-        public Label label15;
-        public Label label14;
-        public Label label13;
-        public Label label12;
-        public Label label11;
+        public Label patientidlbl;
+        public Label fullnamelbl;
+        public Label agelbl;
+        public Label genderlbl;
+        public Label contactnumberlbl;
+        public Label locationlbl;
+        public Label dateofconsultationlbl;
     }
 }
