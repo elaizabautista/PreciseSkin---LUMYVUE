@@ -20,11 +20,11 @@ namespace PreciseSkin___LUMYVUE
 
         // MUST MATCH TRAINING ORDER EXACTLY
         private readonly string[] _labels =
-        {
-            "Acne and Rosacea Photos",
-            "Eczema Photos",
-            "Light Diseases and Disorders of Pigmentation",
-            "Seborrheic Keratoses and other Benign Tumors"
+      {
+             "acne",
+            "eczema",
+             "hyperpigmentation",
+              "normal"
         };
 
         public SkinAnalyzer()
