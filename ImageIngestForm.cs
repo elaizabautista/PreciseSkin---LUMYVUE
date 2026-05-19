@@ -129,7 +129,12 @@ namespace PreciseSkin___LUMYVUE
 
         private void webView21_Click(object sender, EventArgs e)
         {
+            //
+        }
 
+        private void label5_Click(object sender, EventArgs e)
+        {
+            //
         }
     }
 }

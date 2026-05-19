@@ -45,6 +45,9 @@
     <None Update="Assets\LUMYVUE.mp4">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Update="Assets\PreciseSkin.onnx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Update="Assets\ResultsForm.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

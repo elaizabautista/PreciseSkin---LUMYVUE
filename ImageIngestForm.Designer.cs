@@ -36,11 +36,18 @@
             flowLayoutPanel2 = new FlowLayoutPanel();
             btnRunDiagnostics = new Button();
             panel1 = new Panel();
+            label5 = new Label();
+            label4 = new Label();
+            label1 = new Label();
+            label3 = new Label();
+            label2 = new Label();
+            lblpatientid = new Label();
             ((System.ComponentModel.ISupportInitialize)webView21).BeginInit();
             flowLayoutPanel1.SuspendLayout();
             flowLayoutPanel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)picPatientUpload).BeginInit();
             flowLayoutPanel2.SuspendLayout();
+            panel1.SuspendLayout();
             SuspendLayout();
             // 
             // webView21
@@ -123,10 +130,71 @@
             // panel1
             // 
             panel1.BackColor = Color.Snow;
+            panel1.Controls.Add(label5);
+            panel1.Controls.Add(label4);
+            panel1.Controls.Add(label1);
+            panel1.Controls.Add(label3);
+            panel1.Controls.Add(label2);
+            panel1.Controls.Add(lblpatientid);
             panel1.Location = new Point(981, 141);
             panel1.Name = "panel1";
             panel1.Size = new Size(893, 113);
             panel1.TabIndex = 5;
+            // 
+            // label5
+            // 
+            label5.AutoSize = true;
+            label5.Location = new Point(436, 66);
+            label5.Name = "label5";
+            label5.Size = new Size(56, 15);
+            label5.TabIndex = 5;
+            label5.Text = "Location:";
+            label5.Click += label5_Click;
+            // 
+            // label4
+            // 
+            label4.AutoSize = true;
+            label4.Location = new Point(436, 39);
+            label4.Name = "label4";
+            label4.Size = new Size(119, 15);
+            label4.TabIndex = 4;
+            label4.Text = "Date of Consultation:";
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Location = new Point(436, 13);
+            label1.Name = "label1";
+            label1.Size = new Size(48, 15);
+            label1.TabIndex = 3;
+            label1.Text = "Gender:";
+            // 
+            // label3
+            // 
+            label3.AutoSize = true;
+            label3.Location = new Point(15, 66);
+            label3.Name = "label3";
+            label3.Size = new Size(31, 15);
+            label3.TabIndex = 2;
+            label3.Text = "Age:";
+            // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.Location = new Point(15, 39);
+            label2.Name = "label2";
+            label2.Size = new Size(64, 15);
+            label2.TabIndex = 1;
+            label2.Text = "Full Name:";
+            // 
+            // lblpatientid
+            // 
+            lblpatientid.AutoSize = true;
+            lblpatientid.Location = new Point(15, 13);
+            lblpatientid.Name = "lblpatientid";
+            lblpatientid.Size = new Size(61, 15);
+            lblpatientid.TabIndex = 0;
+            lblpatientid.Text = "Patient ID:";
             // 
             // ImageIngestForm
             // 
@@ -146,6 +214,8 @@
             flowLayoutPanel3.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)picPatientUpload).EndInit();
             flowLayoutPanel2.ResumeLayout(false);
+            panel1.ResumeLayout(false);
+            panel1.PerformLayout();
             ResumeLayout(false);
         }
 
@@ -160,5 +230,11 @@
         public Button btnSelectImage;
         private PictureBox pictureBox1;
         public Panel panel1;
+        public Label label3;
+        public Label label2;
+        public Label lblpatientid;
+        public Label label5;
+        public Label label4;
+        public Label label1;
     }
 }
