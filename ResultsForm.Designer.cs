@@ -30,6 +30,13 @@
         {
             webView21 = new Microsoft.Web.WebView2.WinForms.WebView2();
             panel1 = new Panel();
+            patientidlbl = new Label();
+            fullnamelbl = new Label();
+            agelbl = new Label();
+            genderlbl = new Label();
+            contactnumberlbl = new Label();
+            locationlbl = new Label();
+            dateofconsultationlbl = new Label();
             lblCondition1 = new Label();
             label10 = new Label();
             label9 = new Label();
@@ -46,13 +53,6 @@
             panel2 = new Panel();
             picAnalyzedImage = new PictureBox();
             label3 = new Label();
-            dateofconsultationlbl = new Label();
-            locationlbl = new Label();
-            contactnumberlbl = new Label();
-            genderlbl = new Label();
-            agelbl = new Label();
-            fullnamelbl = new Label();
-            patientidlbl = new Label();
             ((System.ComponentModel.ISupportInitialize)webView21).BeginInit();
             panel1.SuspendLayout();
             panel2.SuspendLayout();
@@ -96,8 +96,78 @@
             panel1.Controls.Add(lblCondition);
             panel1.Location = new Point(129, 415);
             panel1.Name = "panel1";
-            panel1.Size = new Size(1173, 467);
+            panel1.Size = new Size(1173, 558);
             panel1.TabIndex = 1;
+            // 
+            // patientidlbl
+            // 
+            patientidlbl.AutoSize = true;
+            patientidlbl.Font = new Font("Yu Gothic", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            patientidlbl.Location = new Point(373, 30);
+            patientidlbl.Name = "patientidlbl";
+            patientidlbl.Size = new Size(27, 27);
+            patientidlbl.TabIndex = 19;
+            patientidlbl.Text = "...";
+            // 
+            // fullnamelbl
+            // 
+            fullnamelbl.AutoSize = true;
+            fullnamelbl.Font = new Font("Yu Gothic", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            fullnamelbl.Location = new Point(373, 73);
+            fullnamelbl.Name = "fullnamelbl";
+            fullnamelbl.Size = new Size(27, 27);
+            fullnamelbl.TabIndex = 18;
+            fullnamelbl.Text = "...";
+            // 
+            // agelbl
+            // 
+            agelbl.AutoSize = true;
+            agelbl.Font = new Font("Yu Gothic", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            agelbl.Location = new Point(373, 113);
+            agelbl.Name = "agelbl";
+            agelbl.Size = new Size(27, 27);
+            agelbl.TabIndex = 17;
+            agelbl.Text = "...";
+            // 
+            // genderlbl
+            // 
+            genderlbl.AutoSize = true;
+            genderlbl.Font = new Font("Yu Gothic", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            genderlbl.Location = new Point(373, 150);
+            genderlbl.Name = "genderlbl";
+            genderlbl.Size = new Size(27, 27);
+            genderlbl.TabIndex = 16;
+            genderlbl.Text = "...";
+            // 
+            // contactnumberlbl
+            // 
+            contactnumberlbl.AutoSize = true;
+            contactnumberlbl.Font = new Font("Yu Gothic", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            contactnumberlbl.Location = new Point(373, 190);
+            contactnumberlbl.Name = "contactnumberlbl";
+            contactnumberlbl.Size = new Size(27, 27);
+            contactnumberlbl.TabIndex = 15;
+            contactnumberlbl.Text = "...";
+            // 
+            // locationlbl
+            // 
+            locationlbl.AutoSize = true;
+            locationlbl.Font = new Font("Yu Gothic", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            locationlbl.Location = new Point(373, 230);
+            locationlbl.Name = "locationlbl";
+            locationlbl.Size = new Size(27, 27);
+            locationlbl.TabIndex = 14;
+            locationlbl.Text = "...";
+            // 
+            // dateofconsultationlbl
+            // 
+            dateofconsultationlbl.AutoSize = true;
+            dateofconsultationlbl.Font = new Font("Yu Gothic", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            dateofconsultationlbl.Location = new Point(373, 271);
+            dateofconsultationlbl.Name = "dateofconsultationlbl";
+            dateofconsultationlbl.Size = new Size(27, 27);
+            dateofconsultationlbl.TabIndex = 13;
+            dateofconsultationlbl.Text = "...";
             // 
             // lblCondition1
             // 
@@ -184,7 +254,7 @@
             // 
             btnBackToUpload.BackColor = Color.SeaShell;
             btnBackToUpload.FlatStyle = FlatStyle.Flat;
-            btnBackToUpload.Location = new Point(0, 418);
+            btnBackToUpload.Location = new Point(0, 506);
             btnBackToUpload.Name = "btnBackToUpload";
             btnBackToUpload.Size = new Size(1170, 49);
             btnBackToUpload.TabIndex = 4;
@@ -241,7 +311,7 @@
             panel2.Controls.Add(label3);
             panel2.Location = new Point(1308, 415);
             panel2.Name = "panel2";
-            panel2.Size = new Size(537, 467);
+            panel2.Size = new Size(570, 555);
             panel2.TabIndex = 5;
             // 
             // picAnalyzedImage
@@ -249,7 +319,7 @@
             picAnalyzedImage.BackColor = Color.Transparent;
             picAnalyzedImage.Location = new Point(3, 30);
             picAnalyzedImage.Name = "picAnalyzedImage";
-            picAnalyzedImage.Size = new Size(577, 516);
+            picAnalyzedImage.Size = new Size(567, 522);
             picAnalyzedImage.SizeMode = PictureBoxSizeMode.Zoom;
             picAnalyzedImage.TabIndex = 6;
             picAnalyzedImage.TabStop = false;
@@ -263,76 +333,6 @@
             label3.Size = new Size(239, 27);
             label3.TabIndex = 5;
             label3.Text = "Y O U R   P I C T U R E ";
-            // 
-            // dateofconsultationlbl
-            // 
-            dateofconsultationlbl.AutoSize = true;
-            dateofconsultationlbl.Font = new Font("Yu Gothic", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            dateofconsultationlbl.Location = new Point(373, 271);
-            dateofconsultationlbl.Name = "dateofconsultationlbl";
-            dateofconsultationlbl.Size = new Size(27, 27);
-            dateofconsultationlbl.TabIndex = 13;
-            dateofconsultationlbl.Text = "...";
-            // 
-            // locationlbl
-            // 
-            locationlbl.AutoSize = true;
-            locationlbl.Font = new Font("Yu Gothic", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            locationlbl.Location = new Point(373, 230);
-            locationlbl.Name = "locationlbl";
-            locationlbl.Size = new Size(27, 27);
-            locationlbl.TabIndex = 14;
-            locationlbl.Text = "...";
-            // 
-            // contactnumberlbl
-            // 
-            contactnumberlbl.AutoSize = true;
-            contactnumberlbl.Font = new Font("Yu Gothic", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            contactnumberlbl.Location = new Point(373, 190);
-            contactnumberlbl.Name = "contactnumberlbl";
-            contactnumberlbl.Size = new Size(27, 27);
-            contactnumberlbl.TabIndex = 15;
-            contactnumberlbl.Text = "...";
-            // 
-            // genderlbl
-            // 
-            genderlbl.AutoSize = true;
-            genderlbl.Font = new Font("Yu Gothic", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            genderlbl.Location = new Point(373, 150);
-            genderlbl.Name = "genderlbl";
-            genderlbl.Size = new Size(27, 27);
-            genderlbl.TabIndex = 16;
-            genderlbl.Text = "...";
-            // 
-            // agelbl
-            // 
-            agelbl.AutoSize = true;
-            agelbl.Font = new Font("Yu Gothic", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            agelbl.Location = new Point(373, 113);
-            agelbl.Name = "agelbl";
-            agelbl.Size = new Size(27, 27);
-            agelbl.TabIndex = 17;
-            agelbl.Text = "...";
-            // 
-            // fullnamelbl
-            // 
-            fullnamelbl.AutoSize = true;
-            fullnamelbl.Font = new Font("Yu Gothic", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            fullnamelbl.Location = new Point(373, 73);
-            fullnamelbl.Name = "fullnamelbl";
-            fullnamelbl.Size = new Size(27, 27);
-            fullnamelbl.TabIndex = 18;
-            fullnamelbl.Text = "...";
-            // 
-            // patientidlbl
-            // 
-            patientidlbl.AutoSize = true;
-            patientidlbl.Font = new Font("Yu Gothic", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            patientidlbl.Location = new Point(373, 30);
-            patientidlbl.Name = "patientidlbl";
-            patientidlbl.Size = new Size(27, 27);
-            patientidlbl.TabIndex = 19;
-            patientidlbl.Text = "...";
             // 
             // ResultsForm
             // 
