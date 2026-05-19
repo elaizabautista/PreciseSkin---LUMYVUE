@@ -22,7 +22,7 @@ namespace PreciseSkin___LUMYVUE
 
             // 1. Assign the predictions
             lblCondition.Text = condition;
-            lblSkinType.Text = $"Fitzpatrick {skinType}";
+            lblSkinType.Text = skinType;
 
             // 2. 🎯 FORCED UPDATE: Clear out old image references first
             if (picAnalyzedImage.Image != null)
