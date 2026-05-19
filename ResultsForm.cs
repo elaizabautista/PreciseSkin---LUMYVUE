@@ -13,7 +13,7 @@ namespace PreciseSkin___LUMYVUE
     {
 
         // 🌟 Updated Constructor: Now accepts 'imagePath' as a third input item
-        public ResultsForm(string condition, string skinType, string imagePath)
+        public ResultsForm(string condition, string modelconfidencescores, string imagePath)
         {
             InitializeComponent();
             this.AutoScaleMode = AutoScaleMode.None;
@@ -21,8 +21,8 @@ namespace PreciseSkin___LUMYVUE
             this.MaximizeBox = false;
 
             // 1. Assign the predictions
-            lblCondition.Text = condition;
-            lblSkinType.Text = skinType;
+            lblCondition1.Text = condition;
+            lblmodelconfidencescores.Text = modelconfidencescores;
 
             // 2. 🎯 FORCED UPDATE: Clear out old image references first
             if (picAnalyzedImage.Image != null)
@@ -114,6 +114,26 @@ namespace PreciseSkin___LUMYVUE
             ImageIngestForm ingestScreen = new ImageIngestForm();
             ingestScreen.Show();
             this.Close();
+        }
+
+        private void lblCondition_Click(object sender, EventArgs e)
+        {
+            //
+        }
+
+        private void lblSkinType_Click(object sender, EventArgs e)
+        {
+            //
+        }
+
+        private void label4_Click(object sender, EventArgs e)
+        {
+            //
+        }
+
+        private void label6_Click(object sender, EventArgs e)
+        {
+            //
         }
     }
 }

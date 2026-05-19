@@ -115,7 +115,7 @@ namespace PreciseSkin___LUMYVUE
                 var report = analyzer.AnalyzeImage(_selectedFilePath);
 
                 // 3. Forward the dynamic data and the chosen image straight to the results dashboard
-                ResultsForm diagnosticsWindow = new ResultsForm(report.ConditionPrediction, report.SkinTypePrediction, _selectedFilePath);
+                ResultsForm diagnosticsWindow = new ResultsForm(report.ConditionPrediction, report.RawScores, _selectedFilePath);
                 diagnosticsWindow.Show();
 
                 // 4. Cleanly hide this ingestion board from view
