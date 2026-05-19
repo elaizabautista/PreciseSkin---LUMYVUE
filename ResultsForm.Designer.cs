@@ -158,7 +158,6 @@
             label6.Size = new Size(56, 27);
             label6.TabIndex = 7;
             label6.Text = "Age:";
-            label6.Click += label6_Click;
             // 
             // label5
             // 
@@ -234,7 +233,6 @@
             lblCondition.Size = new Size(27, 27);
             lblCondition.TabIndex = 0;
             lblCondition.Text = "...";
-            lblCondition.Click += lblCondition_Click;
             // 
             // panel2
             // 

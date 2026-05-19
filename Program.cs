@@ -12,7 +12,7 @@ namespace PreciseSkin___LUMYVUE
             // see https://aka.ms/applicationconfiguration.
             ApplicationConfiguration.Initialize();
             Application.SetHighDpiMode(HighDpiMode.DpiUnaware);
-            Application.Run(new ImageIngestForm());
+            Application.Run(new WelcomeForm());
         }
     }
 }

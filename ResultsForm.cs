@@ -197,19 +197,12 @@ body, html {
 
             this.Close();
         }
-
-        private void lblCondition_Click(
-            object sender,
-            EventArgs e)
+        private void label4_Click(object sender, EventArgs e)
         {
-            //
         }
 
-        private void label6_Click(
-            object sender,
-            EventArgs e)
+        private void lblSkinType_Click(object sender, EventArgs e)
         {
-            //
         }
     }
 }
