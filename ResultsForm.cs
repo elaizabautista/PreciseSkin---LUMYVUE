@@ -158,7 +158,7 @@ namespace PreciseSkin___LUMYVUE
                 // TITLE (CENTER)
                 // =========================
                 Paragraph title =
-                    new Paragraph("PRECISESKIN", titleFont);
+                    new Paragraph("PRECISIONSKIN", titleFont);
 
                 title.Alignment = Element.ALIGN_CENTER;
                 doc.Add(title);
