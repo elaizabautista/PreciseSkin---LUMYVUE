@@ -5,20 +5,20 @@ using System.Windows.Forms;
 using iTextSharp.text;
 using iTextSharp.text.pdf;
 using System.IO;
+using System.Windows.Forms.DataVisualization.Charting;
 
 namespace PreciseSkin___LUMYVUE
 {
+
     public partial class AdminForm : Form
     {
         private string connectionString =
-            @"Data Source=LAPTOP-0DMT6OS6\SQLEXPRESS;
-              Initial Catalog=PreciseSkinDB;
-              Integrated Security=True;
-              TrustServerCertificate=True";
+            @"Data Source=LAPTOP-0DMT6OS6\SQLEXPRESS; Initial Catalog=PreciseSkinDB; Integrated Security=True; TrustServerCertificate=True";
 
         public AdminForm()
         {
             InitializeComponent();
+
         }
 
         // LOAD ALL RECORDS WHEN FORM OPENS
@@ -29,8 +29,7 @@ namespace PreciseSkin___LUMYVUE
 
         private void LoadAllPatients()
         {
-            string connStr =
-        "Data Source=LAPTOP-0DMT6OS6\\SQLEXPRESS;Initial Catalog=PreciseSkinDB;Integrated Security=True;TrustServerCertificate=True";
+            string connStr = "Data Source=LAPTOP-0DMT6OS6\\SQLEXPRESS;Initial Catalog=PreciseSkinDB;Integrated Security=True;TrustServerCertificate=True";
 
             using (SqlConnection conn = new SqlConnection(connStr))
             {
@@ -110,8 +109,7 @@ namespace PreciseSkin___LUMYVUE
 
         private void btnSearch_Click(object sender, EventArgs e)
         {
-            string connStr =
-                "Data Source=LAPTOP-0DMT6OS6\\SQLEXPRESS;Initial Catalog=PreciseSkinDB;Integrated Security=True;TrustServerCertificate=True";
+            string connStr = "Data Source=LAPTOP-0DMT6OS6\\SQLEXPRESS;Initial Catalog=PreciseSkinDB;Integrated Security=True;TrustServerCertificate=True";
 
             using (SqlConnection conn = new SqlConnection(connStr))
             {
@@ -131,8 +129,7 @@ namespace PreciseSkin___LUMYVUE
 
         private void cmbFilterDisease_SelectedIndexChanged(object sender, EventArgs e)
         {
-            string connStr =
-        "Data Source=LAPTOP-0DMT6OS6\\SQLEXPRESS;Initial Catalog=PreciseSkinDB;Integrated Security=True;TrustServerCertificate=True";
+            string connStr = "Data Source=LAPTOP-0DMT6OS6\\SQLEXPRESS;Initial Catalog=PreciseSkinDB;Integrated Security=True;TrustServerCertificate=True";
 
             using (SqlConnection conn = new SqlConnection(connStr))
             {

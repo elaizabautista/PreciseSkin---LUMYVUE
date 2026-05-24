@@ -130,7 +130,7 @@ namespace PreciseSkin___LUMYVUE
                     iTextSharp.text.Image logo =
                         iTextSharp.text.Image.GetInstance(logoPath);
 
-                    logo.ScaleToFit(80f, 80f);
+                    logo.ScaleToFit(90f, 90f);
                     logo.Alignment = Element.ALIGN_CENTER;
 
                     doc.Add(logo);
@@ -140,39 +140,70 @@ namespace PreciseSkin___LUMYVUE
                 // FONTS
                 // =========================
                 Font titleFont =
-                    FontFactory.GetFont(FontFactory.HELVETICA_BOLD, 22);
+                    FontFactory.GetFont(FontFactory.HELVETICA_BOLD, 24);
 
-                Font subtitleFont =
-                    FontFactory.GetFont(FontFactory.HELVETICA, 12);
-
-                Font sectionFont =
+                Font headerFont =
                     FontFactory.GetFont(FontFactory.HELVETICA_BOLD, 14);
+
+                Font subHeaderFont =
+                    FontFactory.GetFont(FontFactory.HELVETICA, 11);
 
                 Font bodyFont =
                     FontFactory.GetFont(FontFactory.HELVETICA, 11);
 
+                Font boldBody =
+                    FontFactory.GetFont(FontFactory.HELVETICA_BOLD, 11);
+
                 // =========================
-                // TITLE
+                // TITLE (CENTER)
                 // =========================
                 Paragraph title =
-                    new Paragraph(
-                        "PRECISESKIN MEDICAL REPORT",
-                        titleFont
-                    );
+                    new Paragraph("PRECISESKIN", titleFont);
 
                 title.Alignment = Element.ALIGN_CENTER;
-
                 doc.Add(title);
 
-                Paragraph clinic =
+                Paragraph subtitle =
+                    new Paragraph("AI-Assisted Dermatological Screening and Patient Record Management System", subHeaderFont);
+
+                subtitle.Alignment = Element.ALIGN_CENTER;
+                doc.Add(subtitle);
+
+                doc.Add(new Paragraph("\n"));
+
+                // =========================
+                // COMPANY HEADER (CENTER)
+                // =========================
+                Paragraph companyHeader =
+                    new Paragraph("SYSTEM DEVELOPERS / RESEARCH TEAM", headerFont);
+
+                companyHeader.Alignment = Element.ALIGN_CENTER;
+                doc.Add(companyHeader);
+
+                Paragraph names =
                     new Paragraph(
-                        "AI-Assisted Dermatological Screening and Patient Record Management System",
-                        subtitleFont
+                        "Elaiza Czarina Claire C. Bautista\n" +
+                        "Pineda, Francesca Nicolette S.\n" +
+                        "Valdez, Andrea M.",
+                        bodyFont
                     );
 
-                clinic.Alignment = Element.ALIGN_CENTER;
+                names.Alignment = Element.ALIGN_CENTER;
+                doc.Add(names);
 
-                doc.Add(clinic);
+                doc.Add(new Paragraph("\n"));
+
+                // =========================
+                // SYSTEM DESCRIPTION (JUSTIFIED)
+                // =========================
+                Paragraph systemDesc =
+                    new Paragraph(
+                        "PreciseSkin is an AI-assisted dermatological screening system that uses machine learning and ONNX runtime integration to analyze skin conditions from uploaded images. The system also provides patient record management, automated diagnostics, and structured medical reporting to support healthcare decision-making.",
+                        bodyFont
+                    );
+
+                systemDesc.Alignment = Element.ALIGN_JUSTIFIED;
+                doc.Add(systemDesc);
 
                 doc.Add(new Paragraph("\n"));
 
@@ -180,42 +211,17 @@ namespace PreciseSkin___LUMYVUE
                 // PATIENT INFORMATION
                 // =========================
                 Paragraph patientHeader =
-                    new Paragraph(
-                        "PATIENT INFORMATION",
-                        sectionFont
-                    );
+                    new Paragraph("PATIENT INFORMATION", headerFont);
 
+                patientHeader.Alignment = Element.ALIGN_CENTER;
                 doc.Add(patientHeader);
 
-                doc.Add(new Paragraph(
-                    "Patient ID: " + patientidlbl.Text,
-                    bodyFont
-                ));
-
-                doc.Add(new Paragraph(
-                    "Full Name: " + fullnamelbl.Text,
-                    bodyFont
-                ));
-
-                doc.Add(new Paragraph(
-                    "Gender: " + genderlbl.Text,
-                    bodyFont
-                ));
-
-                doc.Add(new Paragraph(
-                    "Contact Number: " + contactnumberlbl.Text,
-                    bodyFont
-                ));
-
-                doc.Add(new Paragraph(
-                    "Location: " + locationlbl.Text,
-                    bodyFont
-                ));
-
-                doc.Add(new Paragraph(
-                    "Consultation Date: " + dateofconsultationlbl.Text,
-                    bodyFont
-                ));
+                doc.Add(new Paragraph("Patient ID: " + patientidlbl.Text, bodyFont));
+                doc.Add(new Paragraph("Full Name: " + fullnamelbl.Text, bodyFont));
+                doc.Add(new Paragraph("Gender: " + genderlbl.Text, bodyFont));
+                doc.Add(new Paragraph("Contact Number: " + contactnumberlbl.Text, bodyFont));
+                doc.Add(new Paragraph("Location: " + locationlbl.Text, bodyFont));
+                doc.Add(new Paragraph("Consultation Date: " + dateofconsultationlbl.Text, bodyFont));
 
                 doc.Add(new Paragraph("\n"));
 
@@ -223,93 +229,61 @@ namespace PreciseSkin___LUMYVUE
                 // AI DIAGNOSIS
                 // =========================
                 Paragraph diagnosisHeader =
-                    new Paragraph(
-                        "AI DIAGNOSTIC RESULTS",
-                        sectionFont
-                    );
+                    new Paragraph("AI DIAGNOSTIC RESULTS", headerFont);
 
+                diagnosisHeader.Alignment = Element.ALIGN_CENTER;
                 doc.Add(diagnosisHeader);
 
-                doc.Add(new Paragraph(
-                    "Predicted Skin Condition:",
-                    bodyFont
-                ));
+                doc.Add(new Paragraph("Predicted Skin Condition:", bodyFont));
 
                 Paragraph prediction =
-                    new Paragraph(
-                        lblCondition1.Text,
-                        FontFactory.GetFont(
-                            FontFactory.HELVETICA_BOLD,
-                            16
-                        )
-                    );
+                    new Paragraph(lblCondition1.Text, boldBody);
 
+                prediction.Alignment = Element.ALIGN_CENTER;
                 prediction.SpacingAfter = 10f;
 
                 doc.Add(prediction);
 
-                doc.Add(new Paragraph(
-                    "Model Confidence Scores:",
-                    bodyFont
-                ));
-
-                doc.Add(new Paragraph(
-                    lblmodelconfidencescores.Text,
-                    bodyFont
-                ));
+                doc.Add(new Paragraph("Model Confidence Scores:", bodyFont));
+                doc.Add(new Paragraph(lblmodelconfidencescores.Text, bodyFont));
 
                 doc.Add(new Paragraph("\n"));
 
                 // =========================
-                // ABOUT PRECISESKIN
-                // =========================
-                Paragraph aboutHeader =
-                    new Paragraph(
-                        "ABOUT PRECISESKIN",
-                        sectionFont
-                    );
-
-                doc.Add(aboutHeader);
-
-                doc.Add(new Paragraph(
-                    "PrecisionSkin is a machine learning-based AI-assisted dermatological screening system designed to support preliminary skin condition analysis and patient data management. The system utilizes deep learning and ONNX runtime integration to classify selected dermatological conditions through automated image analysis.",
-                    bodyFont
-                ));
-
-                doc.Add(new Paragraph("\n"));
-
-                // =========================
-                // DISCLAIMER
+                // DISCLAIMER (JUSTIFIED)
                 // =========================
                 Paragraph disclaimerHeader =
-                    new Paragraph(
-                        "DISCLAIMER",
-                        sectionFont
-                    );
+                    new Paragraph("DISCLAIMER", headerFont);
 
+                disclaimerHeader.Alignment = Element.ALIGN_CENTER;
                 doc.Add(disclaimerHeader);
 
-                doc.Add(new Paragraph(
-                    "This report is generated through an AI-assisted screening system and is intended solely for preliminary assessment purposes. The results provided should not replace professional medical diagnosis, treatment, or consultation from licensed dermatologists or healthcare providers.",
-                    bodyFont
-                ));
+                Paragraph disclaimer =
+                    new Paragraph(
+                        "This report is generated through an AI-assisted system and is intended for preliminary screening purposes only. It must not replace professional medical diagnosis, consultation, or treatment by licensed healthcare providers.",
+                        bodyFont
+                    );
+
+                disclaimer.Alignment = Element.ALIGN_JUSTIFIED;
+                doc.Add(disclaimer);
 
                 doc.Add(new Paragraph("\n\n"));
 
                 // =========================
-                // SIGNATURE AREA
+                // SIGNATURE
                 // =========================
-                doc.Add(new Paragraph(
-                    "______________________________",
-                    bodyFont
-                ));
+                Paragraph signLine =
+                    new Paragraph("______________________________", bodyFont);
 
-                doc.Add(new Paragraph(
-                    "Authorized Medical Personnel",
-                    bodyFont
-                ));
+                signLine.Alignment = Element.ALIGN_CENTER;
+                doc.Add(signLine);
 
-                // CLOSE PDF
+                Paragraph signText =
+                    new Paragraph("Authorized Medical Personnel", bodyFont);
+
+                signText.Alignment = Element.ALIGN_CENTER;
+                doc.Add(signText);
+
                 doc.Close();
 
                 MessageBox.Show(

@@ -50,7 +50,7 @@
             label1.AutoSize = true;
             label1.Font = new Font("Yu Gothic Light", 72F, FontStyle.Italic, GraphicsUnit.Point, 0);
             label1.ForeColor = Color.SaddleBrown;
-            label1.Location = new Point(86, 74);
+            label1.Location = new Point(86, 65);
             label1.Name = "label1";
             label1.Size = new Size(1073, 124);
             label1.TabIndex = 0;
@@ -63,7 +63,7 @@
             dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridView1.Location = new Point(86, 285);
             dataGridView1.Name = "dataGridView1";
-            dataGridView1.Size = new Size(764, 490);
+            dataGridView1.Size = new Size(1160, 490);
             dataGridView1.TabIndex = 1;
             // 
             // PatientIDHistoryTxt
@@ -147,7 +147,7 @@
             cmbFilterDisease.Items.AddRange(new object[] { "All", "Acne", "Eczema", "Hyperpigmentation", "Normal" });
             cmbFilterDisease.Location = new Point(867, 256);
             cmbFilterDisease.Name = "cmbFilterDisease";
-            cmbFilterDisease.Size = new Size(572, 23);
+            cmbFilterDisease.Size = new Size(379, 23);
             cmbFilterDisease.TabIndex = 10;
             cmbFilterDisease.SelectedIndexChanged += cmbFilterDisease_SelectedIndexChanged;
             // 
