@@ -2,6 +2,9 @@
 using System.Data;
 using Microsoft.Data.SqlClient;
 using System.Windows.Forms;
+using iTextSharp.text;
+using iTextSharp.text.pdf;
+using System.IO;
 
 namespace PreciseSkin___LUMYVUE
 {
@@ -26,13 +29,16 @@ namespace PreciseSkin___LUMYVUE
 
         private void LoadAllPatients()
         {
-            using (SqlConnection conn = new SqlConnection(connectionString))
+            string connStr =
+        "Data Source=LAPTOP-0DMT6OS6\\SQLEXPRESS;Initial Catalog=PreciseSkinDB;Integrated Security=True;TrustServerCertificate=True";
+
+            using (SqlConnection conn = new SqlConnection(connStr))
             {
                 conn.Open();
 
-                SqlDataAdapter da =
-                    new SqlDataAdapter("SELECT * FROM Patients", conn);
+                string query = "SELECT * FROM Patients ORDER BY Id DESC";
 
+                SqlDataAdapter da = new SqlDataAdapter(query, conn);
                 DataTable dt = new DataTable();
                 da.Fill(dt);
 
@@ -95,6 +101,63 @@ namespace PreciseSkin___LUMYVUE
 
                 dataGridView1.DataSource = dt;
             }
+        }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            LoadAllPatients();
+        }
+
+        private void btnSearch_Click(object sender, EventArgs e)
+        {
+            string connStr =
+                "Data Source=LAPTOP-0DMT6OS6\\SQLEXPRESS;Initial Catalog=PreciseSkinDB;Integrated Security=True;TrustServerCertificate=True";
+
+            using (SqlConnection conn = new SqlConnection(connStr))
+            {
+                conn.Open();
+
+                string query = "SELECT * FROM Patients WHERE FullName LIKE @name";
+
+                SqlDataAdapter da = new SqlDataAdapter(query, conn);
+                da.SelectCommand.Parameters.AddWithValue("@name", "%" + txtSearchName.Text + "%");
+
+                DataTable dt = new DataTable();
+                da.Fill(dt);
+
+                dataGridView1.DataSource = dt;
+            }
+        }
+
+        private void cmbFilterDisease_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            string connStr =
+        "Data Source=LAPTOP-0DMT6OS6\\SQLEXPRESS;Initial Catalog=PreciseSkinDB;Integrated Security=True;TrustServerCertificate=True";
+
+            using (SqlConnection conn = new SqlConnection(connStr))
+            {
+                conn.Open();
+
+                string query;
+
+                if (cmbFilterDisease.Text == "All")
+                {
+                    query = "SELECT * FROM Patients";
+                }
+                else
+                {
+                    query = "SELECT * FROM Patients WHERE Prediction = @pred";
+                }
+
+                SqlDataAdapter da = new SqlDataAdapter(query, conn);
+                da.SelectCommand.Parameters.AddWithValue("@pred", cmbFilterDisease.Text);
+
+                DataTable dt = new DataTable();
+                da.Fill(dt);
+
+                dataGridView1.DataSource = dt;
+            }
+
         }
     }
 }

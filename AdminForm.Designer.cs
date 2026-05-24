@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            components = new System.ComponentModel.Container();
             label1 = new Label();
             dataGridView1 = new DataGridView();
             PatientIDHistoryTxt = new TextBox();
@@ -35,6 +36,12 @@
             label3 = new Label();
             dateTimePicker2 = new DateTimePicker();
             SearchBtn = new Button();
+            timer1 = new System.Windows.Forms.Timer(components);
+            txtSearchName = new TextBox();
+            label4 = new Label();
+            btnSearch = new Button();
+            cmbFilterDisease = new ComboBox();
+            label5 = new Label();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             SuspendLayout();
             // 
@@ -61,9 +68,9 @@
             // 
             // PatientIDHistoryTxt
             // 
-            PatientIDHistoryTxt.Location = new Point(161, 258);
+            PatientIDHistoryTxt.Location = new Point(182, 258);
             PatientIDHistoryTxt.Name = "PatientIDHistoryTxt";
-            PatientIDHistoryTxt.Size = new Size(480, 23);
+            PatientIDHistoryTxt.Size = new Size(459, 23);
             PatientIDHistoryTxt.TabIndex = 2;
             // 
             // label2
@@ -78,7 +85,7 @@
             // label3
             // 
             label3.AutoSize = true;
-            label3.Location = new Point(656, 263);
+            label3.Location = new Point(92, 198);
             label3.Name = "label3";
             label3.Size = new Size(36, 15);
             label3.TabIndex = 4;
@@ -86,7 +93,7 @@
             // 
             // dateTimePicker2
             // 
-            dateTimePicker2.Location = new Point(698, 256);
+            dateTimePicker2.Location = new Point(182, 192);
             dateTimePicker2.Name = "dateTimePicker2";
             dateTimePicker2.Size = new Size(200, 23);
             dateTimePicker2.TabIndex = 5;
@@ -94,13 +101,64 @@
             // 
             // SearchBtn
             // 
-            SearchBtn.Location = new Point(904, 256);
+            SearchBtn.Location = new Point(647, 258);
             SearchBtn.Name = "SearchBtn";
-            SearchBtn.Size = new Size(121, 23);
+            SearchBtn.Size = new Size(115, 23);
             SearchBtn.TabIndex = 6;
             SearchBtn.Text = "Search";
             SearchBtn.UseVisualStyleBackColor = true;
             SearchBtn.Click += SearchBtn_Click;
+            // 
+            // timer1
+            // 
+            timer1.Enabled = true;
+            timer1.Interval = 5000;
+            timer1.Tick += timer1_Tick;
+            // 
+            // txtSearchName
+            // 
+            txtSearchName.Location = new Point(182, 228);
+            txtSearchName.Name = "txtSearchName";
+            txtSearchName.Size = new Size(459, 23);
+            txtSearchName.TabIndex = 7;
+            // 
+            // label4
+            // 
+            label4.AutoSize = true;
+            label4.Location = new Point(92, 231);
+            label4.Name = "label4";
+            label4.Size = new Size(83, 15);
+            label4.TabIndex = 8;
+            label4.Text = "Patient Name:";
+            // 
+            // btnSearch
+            // 
+            btnSearch.Location = new Point(647, 227);
+            btnSearch.Name = "btnSearch";
+            btnSearch.Size = new Size(115, 23);
+            btnSearch.TabIndex = 9;
+            btnSearch.Text = "Search";
+            btnSearch.UseVisualStyleBackColor = true;
+            btnSearch.Click += btnSearch_Click;
+            // 
+            // cmbFilterDisease
+            // 
+            cmbFilterDisease.FormattingEnabled = true;
+            cmbFilterDisease.Items.AddRange(new object[] { "All", "Acne", "Eczema", "Hyperpigmentation", "Normal" });
+            cmbFilterDisease.Location = new Point(867, 256);
+            cmbFilterDisease.Name = "cmbFilterDisease";
+            cmbFilterDisease.Size = new Size(644, 23);
+            cmbFilterDisease.TabIndex = 10;
+            cmbFilterDisease.SelectedIndexChanged += cmbFilterDisease_SelectedIndexChanged;
+            // 
+            // label5
+            // 
+            label5.AutoSize = true;
+            label5.Location = new Point(782, 264);
+            label5.Name = "label5";
+            label5.Size = new Size(79, 15);
+            label5.TabIndex = 11;
+            label5.Text = "Disease Type:";
             // 
             // AdminForm
             // 
@@ -108,6 +166,11 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.PeachPuff;
             ClientSize = new Size(1564, 850);
+            Controls.Add(label5);
+            Controls.Add(cmbFilterDisease);
+            Controls.Add(btnSearch);
+            Controls.Add(label4);
+            Controls.Add(txtSearchName);
             Controls.Add(SearchBtn);
             Controls.Add(dateTimePicker2);
             Controls.Add(label3);
@@ -135,5 +198,11 @@
         public DateTimePicker dateTimePicker2;
         public Button SearchBtn;
         private TextBox textBox1;
+        protected System.Windows.Forms.Timer timer1;
+        private TextBox txtSearchName;
+        public Label label4;
+        public Button btnSearch;
+        public ComboBox cmbFilterDisease;
+        public Label label5;
     }
 }

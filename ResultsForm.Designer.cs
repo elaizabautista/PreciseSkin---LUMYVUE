@@ -55,11 +55,14 @@
             label3 = new Label();
             flowLayoutPanel1 = new FlowLayoutPanel();
             btnAdminDashboard = new Button();
+            panel3 = new Panel();
+            btnExportPDF = new Button();
             ((System.ComponentModel.ISupportInitialize)webView21).BeginInit();
             panel1.SuspendLayout();
             panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)picAnalyzedImage).BeginInit();
             flowLayoutPanel1.SuspendLayout();
+            panel3.SuspendLayout();
             SuspendLayout();
             // 
             // webView21
@@ -98,7 +101,7 @@
             panel1.Controls.Add(label2);
             panel1.Controls.Add(label1);
             panel1.Controls.Add(lblCondition);
-            panel1.Location = new Point(129, 415);
+            panel1.Location = new Point(127, 423);
             panel1.Name = "panel1";
             panel1.Size = new Size(1173, 558);
             panel1.TabIndex = 1;
@@ -313,7 +316,7 @@
             panel2.BackColor = Color.Tan;
             panel2.Controls.Add(picAnalyzedImage);
             panel2.Controls.Add(label3);
-            panel2.Location = new Point(1308, 415);
+            panel2.Location = new Point(1306, 423);
             panel2.Name = "panel2";
             panel2.Size = new Size(570, 555);
             panel2.TabIndex = 5;
@@ -342,7 +345,7 @@
             // 
             flowLayoutPanel1.BackColor = Color.AntiqueWhite;
             flowLayoutPanel1.Controls.Add(btnAdminDashboard);
-            flowLayoutPanel1.Location = new Point(1756, 57);
+            flowLayoutPanel1.Location = new Point(1754, 65);
             flowLayoutPanel1.Name = "flowLayoutPanel1";
             flowLayoutPanel1.Size = new Size(122, 28);
             flowLayoutPanel1.TabIndex = 6;
@@ -359,10 +362,31 @@
             btnAdminDashboard.UseVisualStyleBackColor = false;
             btnAdminDashboard.Click += btnAdminDashboard_Click;
             // 
+            // panel3
+            // 
+            panel3.BackColor = Color.PeachPuff;
+            panel3.Controls.Add(btnExportPDF);
+            panel3.Location = new Point(1757, 384);
+            panel3.Name = "panel3";
+            panel3.Size = new Size(119, 33);
+            panel3.TabIndex = 7;
+            // 
+            // btnExportPDF
+            // 
+            btnExportPDF.BackColor = Color.SeaShell;
+            btnExportPDF.Location = new Point(0, 0);
+            btnExportPDF.Name = "btnExportPDF";
+            btnExportPDF.Size = new Size(119, 33);
+            btnExportPDF.TabIndex = 0;
+            btnExportPDF.Text = "Export PDF";
+            btnExportPDF.UseVisualStyleBackColor = false;
+            btnExportPDF.Click += btnExportPDF_Click;
+            // 
             // ResultsForm
             // 
             AutoScaleMode = AutoScaleMode.None;
             ClientSize = new Size(1924, 1061);
+            Controls.Add(panel3);
             Controls.Add(flowLayoutPanel1);
             Controls.Add(panel2);
             Controls.Add(panel1);
@@ -378,6 +402,7 @@
             panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)picAnalyzedImage).EndInit();
             flowLayoutPanel1.ResumeLayout(false);
+            panel3.ResumeLayout(false);
             ResumeLayout(false);
         }
 
@@ -409,7 +434,9 @@
         public Label contactnumberlbl;
         public Label locationlbl;
         public Label dateofconsultationlbl;
-        private FlowLayoutPanel flowLayoutPanel1;
         public Button btnAdminDashboard;
+        public Panel panel3;
+        public Button btnExportPDF;
+        public FlowLayoutPanel flowLayoutPanel1;
     }
 }
