@@ -63,7 +63,7 @@
             dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridView1.Location = new Point(86, 285);
             dataGridView1.Name = "dataGridView1";
-            dataGridView1.Size = new Size(1425, 509);
+            dataGridView1.Size = new Size(764, 490);
             dataGridView1.TabIndex = 1;
             // 
             // PatientIDHistoryTxt
@@ -147,7 +147,7 @@
             cmbFilterDisease.Items.AddRange(new object[] { "All", "Acne", "Eczema", "Hyperpigmentation", "Normal" });
             cmbFilterDisease.Location = new Point(867, 256);
             cmbFilterDisease.Name = "cmbFilterDisease";
-            cmbFilterDisease.Size = new Size(644, 23);
+            cmbFilterDisease.Size = new Size(572, 23);
             cmbFilterDisease.TabIndex = 10;
             cmbFilterDisease.SelectedIndexChanged += cmbFilterDisease_SelectedIndexChanged;
             // 

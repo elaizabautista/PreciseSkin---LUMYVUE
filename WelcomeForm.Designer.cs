@@ -36,6 +36,8 @@ namespace PreciseSkin___LUMYVUE
             panelControlBar = new Panel();
             btnProceedToUpload = new Button();
             animationTimer = new System.Windows.Forms.Timer(components);
+            panel1 = new Panel();
+            btnAdminLogin = new Button();
             ((System.ComponentModel.ISupportInitialize)videoBackground).BeginInit();
             panelControlBar.SuspendLayout();
             SuspendLayout();
@@ -82,11 +84,33 @@ namespace PreciseSkin___LUMYVUE
             animationTimer.Interval = 15;
             animationTimer.Tick += animationTimer_Tick;
             // 
+            // panel1
+            // 
+            panel1.Dock = DockStyle.Top;
+            panel1.Location = new Point(0, 0);
+            panel1.Name = "panel1";
+            panel1.Size = new Size(1394, 20);
+            panel1.TabIndex = 2;
+            // 
+            // btnAdminLogin
+            // 
+            btnAdminLogin.BackColor = Color.PeachPuff;
+            btnAdminLogin.Font = new Font("Yu Gothic", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            btnAdminLogin.Location = new Point(0, 0);
+            btnAdminLogin.Name = "btnAdminLogin";
+            btnAdminLogin.Size = new Size(1973, 20);
+            btnAdminLogin.TabIndex = 0;
+            btnAdminLogin.Text = "Admin Form";
+            btnAdminLogin.UseVisualStyleBackColor = false;
+            btnAdminLogin.Click += btnAdminLogin_Click;
+            // 
             // WelcomeForm
             // 
             AutoScaleDimensions = new SizeF(96F, 96F);
             AutoScaleMode = AutoScaleMode.Dpi;
             ClientSize = new Size(1394, 735);
+            Controls.Add(btnAdminLogin);
+            Controls.Add(panel1);
             Controls.Add(videoBackground);
             Controls.Add(panelControlBar);
             Name = "WelcomeForm";
@@ -102,7 +126,9 @@ namespace PreciseSkin___LUMYVUE
         #endregion
         public Microsoft.Web.WebView2.WinForms.WebView2 videoBackground;
         public Panel panelControlBar;
-        private System.Windows.Forms.Timer animationTimer;
         public Button btnProceedToUpload;
+        public Panel panel1;
+        public Button btnAdminLogin;
+        public System.Windows.Forms.Timer animationTimer;
     }
 }

@@ -110,5 +110,28 @@ namespace PreciseSkin___LUMYVUE
         }
 
         private void videoBackground_Click_1(object sender, EventArgs e) { }
+
+        private void btnAdminLogin_Click(object sender, EventArgs e)
+        {
+            string password =
+                    Microsoft.VisualBasic.Interaction.InputBox(
+                        "Enter Admin Password",
+                        "Admin Authentication"
+                    );
+
+            if (password == "admin123")
+            {
+                AdminForm admin = new AdminForm();
+
+                admin.Show();
+            }
+            else
+            {
+                MessageBox.Show(
+                    "Access Denied",
+                    "Security Warning"
+                );
+            }
+        }
     }
 }
