@@ -287,7 +287,7 @@ namespace PreciseSkin___LUMYVUE
                 doc.Close();
 
                 MessageBox.Show(
-                    "Professional medical report exported successfully!",
+                    "Medical report exported successfully!",
                     "PDF Export"
                 );
             }
