@@ -36,9 +36,7 @@ namespace PreciseSkin___LUMYVUE
             this.FormBorderStyle = FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
 
-            // =========================
-            // AI RESULTS
-            // =========================
+            // AI RESULT
 
             lblCondition1.Text =
                 condition;
@@ -46,9 +44,9 @@ namespace PreciseSkin___LUMYVUE
             lblmodelconfidencescores.Text =
                 modelconfidencescores;
 
-            // =========================
+    
             // PATIENT INFORMATION
-            // =========================
+    
 
             patientidlbl.Text =
                 patientId;
@@ -71,9 +69,8 @@ namespace PreciseSkin___LUMYVUE
             dateofconsultationlbl.Text =
                 consultationDate;
 
-            // =========================
             // IMAGE LOADING
-            // =========================
+     
 
             if (picAnalyzedImage.Image != null)
             {
@@ -116,9 +113,9 @@ namespace PreciseSkin___LUMYVUE
 
                 doc.Open();
 
-                // =========================
+       
                 // LOGO
-                // =========================
+
                 string logoPath = Path.Combine(
                     AppDomain.CurrentDomain.BaseDirectory,
                     "Assets",
@@ -223,7 +220,7 @@ namespace PreciseSkin___LUMYVUE
 
                 doc.Add(new Paragraph("\n"));
 
-                // DISCLAIMER (JUSTIFIED)
+                // DISCLAIMER 
  
                 Paragraph disclaimerHeader = new Paragraph("DISCLAIMER", headerFont);
 
@@ -324,9 +321,9 @@ body, html {
             webView21.NavigateToString(htmlLayout);
         }
 
-        /// <summary>
+
         /// Return to upload screen
-        /// </summary>
+  
         private void btnBackToUpload_Click(object sender, EventArgs e)
         {
             foreach (Form openForm in Application.OpenForms)
