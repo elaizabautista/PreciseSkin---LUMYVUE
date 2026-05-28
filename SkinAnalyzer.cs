@@ -18,7 +18,7 @@ namespace PreciseSkin___LUMYVUE
     {
         private readonly InferenceSession _session;
 
-        // MUST MATCH TRAINING ORDER EXACTLY
+ 
         private readonly string[] _labels =
         {
             "Acne",

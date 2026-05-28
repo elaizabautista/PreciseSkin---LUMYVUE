@@ -7,31 +7,26 @@ namespace PreciseSkin___LUMYVUE
 {
     public partial class AboutUs : Form
     {
-        // Track if the form is fading IN (false) or fading OUT to the next screen (true)
         private bool isExitingToUpload = false;
 
         public AboutUs()
         {
             InitializeComponent();
 
-            // Force double-buffering to keep WebView2 video transitions seamless
             this.DoubleBuffered = true;
             this.Opacity = 0;
 
-            // 🌟 FIXED: This explicitly tells Windows Forms to run your setup code when this form loads!
             this.Load += new System.EventHandler(this.AboutUs_Load);
 
-            // 🌟 FIXED: Safely wire up the fade timer tick event in case the designer dropped it
             this.fadeTimer.Tick += new System.EventHandler(this.fadeTimer_Tick);
         }
 
-        // Overrides window parameters to prevent flickering layers during alpha cross-fades
         protected override CreateParams CreateParams
         {
             get
             {
                 CreateParams cp = base.CreateParams;
-                cp.ExStyle |= 0x02000000; // WS_EX_COMPOSITED
+                cp.ExStyle |= 0x02000000; 
                 return cp;
             }
         }
@@ -41,17 +36,17 @@ namespace PreciseSkin___LUMYVUE
             fadeTimer.Interval = 15;
             fadeTimer.Start();
 
-            // 🌟 THE ULTIMATE LAYOUT RESET FOR THE BUTTON 🌟
-            btnProceedToUpload.Dock = DockStyle.Bottom;        // Forces it to stretch across the full width
-            btnProceedToUpload.Height = 44;                    // Dictates the exact height of the bottom bar
-            btnProceedToUpload.AutoSize = false;               // Stops WinForms from squishing the height down
-            btnProceedToUpload.TextAlign = ContentAlignment.MiddleCenter; // Centers the text perfectly
-            btnProceedToUpload.Padding = new Padding(0);       // Clears out any bad text padding loops
+  
+            btnProceedToUpload.Dock = DockStyle.Bottom;        
+            btnProceedToUpload.Height = 44;                    
+            btnProceedToUpload.AutoSize = false;               
+            btnProceedToUpload.TextAlign = ContentAlignment.MiddleCenter; 
+            btnProceedToUpload.Padding = new Padding(0);       
 
-            // Force the video layout container to go to the back layer so the button sits on top
+ 
             webView21.SendToBack();
 
-            // 1. Wait for the engine to initialize
+            // Wait for the engine to initialize
             await webView21.EnsureCoreWebView2Async();
 
             string assetsFolder = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Assets");
@@ -83,28 +78,28 @@ namespace PreciseSkin___LUMYVUE
         {
             if (!isExitingToUpload)
             {
-                // --- ENTRANCE FADE IN ---
+                // entrance
                 if (this.Opacity < 1.0)
                 {
                     this.Opacity += 0.05;
                 }
                 else
                 {
-                    fadeTimer.Stop(); // Lock at fully solid
+                    fadeTimer.Stop(); 
                 }
             }
             else
             {
-                // --- EXIT FADE OUT ---
+                // exit
                 if (this.Opacity > 0.0)
                 {
-                    this.Opacity -= 0.06; // Smoothly dim to black
+                    this.Opacity -= 0.06; 
                 }
                 else
                 {
                     fadeTimer.Stop();
 
-                    // Launch step 2 of your checklist: Picture Ingestion!
+                   
                     ImageIngestForm uploadForm = new ImageIngestForm();
                     uploadForm.Show();
 

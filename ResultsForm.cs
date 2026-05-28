@@ -136,85 +136,63 @@ namespace PreciseSkin___LUMYVUE
                     doc.Add(logo);
                 }
 
-                // =========================
                 // FONTS
-                // =========================
-                Font titleFont =
-                    FontFactory.GetFont(FontFactory.HELVETICA_BOLD, 24);
+                Font titleFont = FontFactory.GetFont(FontFactory.HELVETICA_BOLD, 24);
 
-                Font headerFont =
-                    FontFactory.GetFont(FontFactory.HELVETICA_BOLD, 14);
+                Font headerFont = FontFactory.GetFont(FontFactory.HELVETICA_BOLD, 14);
 
-                Font subHeaderFont =
-                    FontFactory.GetFont(FontFactory.HELVETICA, 11);
+                Font subHeaderFont = FontFactory.GetFont(FontFactory.HELVETICA, 11);
 
-                Font bodyFont =
-                    FontFactory.GetFont(FontFactory.HELVETICA, 11);
+                Font bodyFont = FontFactory.GetFont(FontFactory.HELVETICA, 11);
 
-                Font boldBody =
-                    FontFactory.GetFont(FontFactory.HELVETICA_BOLD, 11);
+                Font boldBody = FontFactory.GetFont(FontFactory.HELVETICA_BOLD, 11);
 
-                // =========================
                 // TITLE (CENTER)
-                // =========================
-                Paragraph title =
-                    new Paragraph("PRECISIONSKIN", titleFont);
 
-                title.Alignment = Element.ALIGN_CENTER;
-                doc.Add(title);
+                Paragraph title = new Paragraph("PRECISIONSKIN", titleFont);
 
-                Paragraph subtitle =
-                    new Paragraph("AI-Assisted Dermatological Screening and Patient Record Management System", subHeaderFont);
+                title.Alignment = Element.ALIGN_CENTER; doc.Add(title);
+
+                Paragraph subtitle = new Paragraph("AI-Assisted Dermatological Screening and Patient Record Management System", subHeaderFont);
 
                 subtitle.Alignment = Element.ALIGN_CENTER;
                 doc.Add(subtitle);
 
                 doc.Add(new Paragraph("\n"));
 
-                // =========================
-                // COMPANY HEADER (CENTER)
-                // =========================
-                Paragraph companyHeader =
-                    new Paragraph("SYSTEM DEVELOPERS / RESEARCH TEAM", headerFont);
 
-                companyHeader.Alignment = Element.ALIGN_CENTER;
-                doc.Add(companyHeader);
+                // COMPANY HEADER 
 
-                Paragraph names =
-                    new Paragraph(
+                Paragraph companyHeader = new Paragraph("SYSTEM DEVELOPERS / RESEARCH TEAM", headerFont);
+
+                companyHeader.Alignment = Element.ALIGN_CENTER; doc.Add(companyHeader);
+
+                Paragraph names = new Paragraph(
                         "Elaiza Czarina Claire C. Bautista\n" +
                         "Pineda, Francesca Nicolette S.\n" +
                         "Valdez, Andrea M.",
                         bodyFont
                     );
 
-                names.Alignment = Element.ALIGN_CENTER;
-                doc.Add(names);
+                names.Alignment = Element.ALIGN_CENTER; doc.Add(names);
 
                 doc.Add(new Paragraph("\n"));
 
-                // =========================
-                // SYSTEM DESCRIPTION (JUSTIFIED)
-                // =========================
-                Paragraph systemDesc =
-                    new Paragraph(
+
+                // SYSTEM DESCRIPTION 
+                Paragraph systemDesc = new Paragraph(
                         "PreciseSkin is an AI-assisted dermatological screening system that uses machine learning and ONNX runtime integration to analyze skin conditions from uploaded images. The system also provides patient record management, automated diagnostics, and structured medical reporting to support healthcare decision-making.",
                         bodyFont
                     );
 
-                systemDesc.Alignment = Element.ALIGN_JUSTIFIED;
-                doc.Add(systemDesc);
+                systemDesc.Alignment = Element.ALIGN_JUSTIFIED; doc.Add(systemDesc);
 
                 doc.Add(new Paragraph("\n"));
 
-                // =========================
                 // PATIENT INFORMATION
-                // =========================
-                Paragraph patientHeader =
-                    new Paragraph("PATIENT INFORMATION", headerFont);
+                Paragraph patientHeader = new Paragraph("PATIENT INFORMATION", headerFont);
 
-                patientHeader.Alignment = Element.ALIGN_CENTER;
-                doc.Add(patientHeader);
+                patientHeader.Alignment = Element.ALIGN_CENTER; doc.Add(patientHeader);
 
                 doc.Add(new Paragraph("Patient ID: " + patientidlbl.Text, bodyFont));
                 doc.Add(new Paragraph("Full Name: " + fullnamelbl.Text, bodyFont));
@@ -225,19 +203,15 @@ namespace PreciseSkin___LUMYVUE
 
                 doc.Add(new Paragraph("\n"));
 
-                // =========================
-                // AI DIAGNOSIS
-                // =========================
-                Paragraph diagnosisHeader =
-                    new Paragraph("AI DIAGNOSTIC RESULTS", headerFont);
 
-                diagnosisHeader.Alignment = Element.ALIGN_CENTER;
-                doc.Add(diagnosisHeader);
+                // AI DIAGNOSIS
+                Paragraph diagnosisHeader = new Paragraph("AI DIAGNOSTIC RESULTS", headerFont);
+
+                diagnosisHeader.Alignment = Element.ALIGN_CENTER; doc.Add(diagnosisHeader);
 
                 doc.Add(new Paragraph("Predicted Skin Condition:", bodyFont));
 
-                Paragraph prediction =
-                    new Paragraph(lblCondition1.Text, boldBody);
+                Paragraph prediction = new Paragraph(lblCondition1.Text, boldBody);
 
                 prediction.Alignment = Element.ALIGN_CENTER;
                 prediction.SpacingAfter = 10f;
@@ -249,14 +223,11 @@ namespace PreciseSkin___LUMYVUE
 
                 doc.Add(new Paragraph("\n"));
 
-                // =========================
                 // DISCLAIMER (JUSTIFIED)
-                // =========================
-                Paragraph disclaimerHeader =
-                    new Paragraph("DISCLAIMER", headerFont);
+ 
+                Paragraph disclaimerHeader = new Paragraph("DISCLAIMER", headerFont);
 
-                disclaimerHeader.Alignment = Element.ALIGN_CENTER;
-                doc.Add(disclaimerHeader);
+                disclaimerHeader.Alignment = Element.ALIGN_CENTER; doc.Add(disclaimerHeader);
 
                 Paragraph disclaimer =
                     new Paragraph(
@@ -264,25 +235,19 @@ namespace PreciseSkin___LUMYVUE
                         bodyFont
                     );
 
-                disclaimer.Alignment = Element.ALIGN_JUSTIFIED;
-                doc.Add(disclaimer);
+                disclaimer.Alignment = Element.ALIGN_JUSTIFIED; doc.Add(disclaimer);
 
                 doc.Add(new Paragraph("\n\n"));
 
-                // =========================
+ 
                 // SIGNATURE
-                // =========================
-                Paragraph signLine =
-                    new Paragraph("______________________________", bodyFont);
+                Paragraph signLine = new Paragraph("______________________________", bodyFont);
 
-                signLine.Alignment = Element.ALIGN_CENTER;
-                doc.Add(signLine);
+                signLine.Alignment = Element.ALIGN_CENTER; doc.Add(signLine);
 
-                Paragraph signText =
-                    new Paragraph("Authorized Medical Personnel", bodyFont);
+                Paragraph signText = new Paragraph("Authorized Medical Personnel", bodyFont);
 
-                signText.Alignment = Element.ALIGN_CENTER;
-                doc.Add(signText);
+                signText.Alignment = Element.ALIGN_CENTER;  doc.Add(signText);
 
                 doc.Close();
 

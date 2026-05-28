@@ -14,36 +14,35 @@ namespace PreciseSkin___LUMYVUE
         {
             InitializeComponent();
 
-            // 1. Force the form to use double-buffering to stop control flickering
             this.DoubleBuffered = true;
             this.SetStyle(ControlStyles.AllPaintingInWmPaint | ControlStyles.UserPaint | ControlStyles.OptimizedDoubleBuffer, true);
 
-            // 2. Start completely invisible for the smooth entry fade
+        
             this.Opacity = 0;
 
             this.Load += new System.EventHandler(this.WelcomeForm_Load_1);
             this.animationTimer.Tick += new System.EventHandler(this.animationTimer_Tick);
         }
 
-        // 🌟 THE SECRET WEAPON TO STOP ALL WINFORMS GLITCHING 🌟
-        // This forces Windows to compositing the entire form layer down seamlessly
+
+        // This forces Windows to compositing the entire form layer down 
         protected override CreateParams CreateParams
         {
             get
             {
                 CreateParams cp = base.CreateParams;
-                cp.ExStyle |= 0x02000000; // WS_EX_COMPOSITED: Paints all controls from bottom to top smoothly
+                cp.ExStyle |= 0x02000000; 
                 return cp;
             }
         }
 
         private async void WelcomeForm_Load_1(object sender, EventArgs e)
         {
-            // 3. Set a crisp interval for the animation timer
+            // animation timer
             animationTimer.Interval = 15;
             animationTimer.Start();
 
-            // 4. Initialize your video engine background
+            //video engine background
             await videoBackground.EnsureCoreWebView2Async();
             string assetsFolder = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Assets");
             videoBackground.CoreWebView2.SetVirtualHostNameToFolderMapping(
@@ -74,10 +73,10 @@ namespace PreciseSkin___LUMYVUE
         {
             if (!isExiting)
             {
-                // --- SMOOTH ENTRANCE FADE ---
+                // entrance
                 if (this.Opacity < 1.0)
                 {
-                    this.Opacity += 0.05; // Fades in cleanly
+                    this.Opacity += 0.05; 
                 }
                 else
                 {
@@ -86,16 +85,16 @@ namespace PreciseSkin___LUMYVUE
             }
             else
             {
-                // --- SMOOTH EXIT FADE ---
+                // exit
                 if (this.Opacity > 0.0)
                 {
-                    this.Opacity -= 0.06; // Dissolves down beautifully
+                    this.Opacity -= 0.06; 
                 }
                 else
                 {
                     animationTimer.Stop();
 
-                    // Open the AboutUs form right as this one vanishes
+                    // Open the AboutUs form 
                     AboutUs nextForm = new AboutUs();
                     nextForm.Show();
                     this.Hide();
